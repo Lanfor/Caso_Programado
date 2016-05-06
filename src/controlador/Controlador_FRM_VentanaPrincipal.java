@@ -11,6 +11,9 @@ import modelo.ConexionBD;
 import modelo.MetodosCursos;
 import modelo.MetodosEstudiantes;
 import modelo.MetodosUsuarios;
+import modelo.Metodos_XML_Estudiantes;
+import modelo.Metodos_XML_Matricula;
+import modelo.Metodos_XML_Usuarios;
 import modelo.Verificar;
 import vista.FRM_LogIn;
 import vista.FRM_MantenimientoCursos;
@@ -42,8 +45,12 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
     MetodosCursos metodosCursos;
     public MetodosUsuarios metodosUsuarios;
 
-//******************* C O N E X I O N*************************************//
+//******************* C O N E X I O N *************************************//
     ConexionBD conexionBD;
+//******************* A R C H I V O S - X M L *******************************//
+    Metodos_XML_Usuarios metodos_XML_Usuarios;
+    Metodos_XML_Estudiantes metodos_XML_Estudiantes;
+    Metodos_XML_Matricula metodos_XML_Matricula;
     String TipoAlmacenamiento="";
     
     public Verificar vericar;
@@ -57,7 +64,6 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
         metodosCursos=new MetodosCursos();
         metodosUsuarios=new MetodosUsuarios();
         
-        
         frm_MantenimientoEstudiantes= new FRM_MantenimientoEstudiantes(metodosEstudiantes);
         frm_MantenimientosCursos = new FRM_MantenimientoCursos(metodosCursos);
         frm_Matricula=new FRM_Matricula(metodosEstudiantes, metodosCursos);
@@ -66,9 +72,12 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
         frm_TipoAlmacenamiento=new FRM_TipoAlmacenamiento(this);
         
         frm_RegistroUsuarios.controlador_FRM_RegistroUsuarios.controlador_FRM_VentanaPrincipal=this;
-        
         frm_RegistroUsuarios.controlador_FRM_RegistroUsuarios.conexionBD=this.conexionBD;
         frm_MantenimientoEstudiantes.controlador_FRM_MantenimientoEstudiantes.controlador_FRM_VentanaPrincipal=this;
+        
+        metodos_XML_Usuarios=new Metodos_XML_Usuarios(frm_RegistroUsuarios);
+        metodos_XML_Estudiantes=new Metodos_XML_Estudiantes(frm_MantenimientoEstudiantes);
+        metodos_XML_Matricula=new Metodos_XML_Matricula(frm_Matricula);
     }
 
     public String getTipoAlmacenamiento() {

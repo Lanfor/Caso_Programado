@@ -40,6 +40,7 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
                 break;
                 case "Archivo XML":
                     //Falta XML
+                    registrarConXML();
                 break;
                 case "Base de Datos":
                     registrarConBD();
@@ -51,7 +52,37 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
     }
     public void registrarConXML()
     {
-        
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarLetras(frm_RegistroUsuarios.devolverInformacion()[0]))
+            if(controlador_FRM_VentanaPrincipal.vericar.verificarSimbolo(frm_RegistroUsuarios.getCorreo()))
+            {
+                if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_RegistroUsuarios.getContrasena()))
+                {
+                        if(!controlador_FRM_VentanaPrincipal.metodos_XML_Usuarios.consultarInformacionDelXml(frm_RegistroUsuarios.devolverInformacion()[0]))
+                        {
+                            controlador_FRM_VentanaPrincipal.metodos_XML_Usuarios.guardarEnXML(frm_RegistroUsuarios.devolverInformacion());
+                            frm_RegistroUsuarios.usuarioNegro();
+                            frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito");
+                            frm_RegistroUsuarios.resetearVentana();
+                            frm_RegistroUsuarios.hide();
+                            frm_VentanaPrincipal.show();
+                         }
+                         else
+                        {
+                            frm_RegistroUsuarios.mostrarMensaje("Este nombre de usuario ya existe");
+                            frm_RegistroUsuarios.usuarioRojo();
+                        }
+                }
+                else
+                {
+                    frm_RegistroUsuarios.mostrarMensaje("Debe digitar una contraseña");
+                }
+            }
+            else
+            {
+                frm_RegistroUsuarios.mostrarMensaje("El Correo debe contener @ y .");
+            }
+        else
+            frm_RegistroUsuarios.mostrarMensaje("El nombre de usuario debe contener solo letras");
     }
     public  void registrarConBD()
     { 
