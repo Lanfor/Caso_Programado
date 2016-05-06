@@ -15,12 +15,12 @@ public class Verificar
     
     public boolean verificarNumero(String texto)//metodo que sirve para verificar si en el txt existe un #
     {
-        boolean esNumero = false;
+        boolean esNumero = true;
         for (int i = 0; i < texto.length(); i++)
         {
-            if(Character.isDigit(texto.charAt(i)))
+            if(!Character.isDigit(Integer.parseInt(texto.charAt(i)+"")))
             {
-                esNumero = true;
+                esNumero = false;
                 break;
             }
         }
