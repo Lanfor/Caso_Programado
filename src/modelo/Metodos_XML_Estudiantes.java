@@ -238,6 +238,14 @@ public class Metodos_XML_Estudiantes
             System.err.println("Error al modificar: " + e);
         }
     }
+//*************** Metodo para ver si hay al menos un Curso guardado en el archivo************//
+    public boolean haveInformatioInXml(String sigla)
+    { 
+        Element raiz = document.getDocumentElement();
+        NodeList listaDeItems = raiz.getElementsByTagName("Matricula");
+        
+        return listaDeItems.getLength()>0;
+    }
     public void eliminarInformacionDelXml(String cedula)
     { 
          Element raiz = document.getDocumentElement();

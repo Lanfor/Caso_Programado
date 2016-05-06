@@ -183,14 +183,14 @@ public class Metodos_XML_Matricula
 
          for(int contadorItems=0; contadorItems<listaDeItems.getLength(); contadorItems++)//
          {   
-             Node item = listaDeItems.item(contadorItems);//Devuelve el primer item de con la etiqueta Matricula
-             NodeList datosItem = item.getChildNodes();
+             Node item = listaDeItems.item(contadorItems);//Devuelve el item de con la etiqueta Matricula en esa (posicion)
+             NodeList datosItem = item.getChildNodes();//Devuelve todos los Elemetos dentro de Matricula
              for(int contadorTags=0; contadorTags<datosItem.getLength(); contadorTags++) 
              {           
-                 tag = datosItem.item(contadorTags); 
-                 datoContenido = tag.getFirstChild();
+                 tag = datosItem.item(contadorTags);//devuelve
+                 datoContenido = tag.getFirstChild();//
 
-                 if(tag.getNodeName().equals("sigla") && datoContenido.getNodeValue().equals(""+sigla) )
+                 if(tag.getNodeName().equals("codigo") && datoContenido.getNodeValue().equals(""+codigo) )
                  {
                     itemEncontrado=true;     
                  }
@@ -209,10 +209,7 @@ public class Metodos_XML_Matricula
     { 
         Element raiz = document.getDocumentElement();
         NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Cual es?
-        if(listaDeItems.getLength()==0)
-            return false;
-        else
-            return true;
+        return listaDeItems.getLength()>0;
     }
     public String[] getArregloInformacion()
     {

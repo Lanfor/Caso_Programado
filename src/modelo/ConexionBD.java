@@ -7,7 +7,7 @@ package modelo;
 
 /**
  *
- * @author RandyGUTI
+ * @author Lanfor Mena y Andy Carrillo
  */
 
 import java.sql.Connection;
@@ -39,7 +39,8 @@ public class ConexionBD {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, userName, password);
             System.out.println("Conexión Realizada");
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             System.err.println("Cannot connect to database server");
             System.err.println(e.getMessage());
             e.printStackTrace();

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package modelo;
+
 import java.awt.List;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import modelo.Metodos_XML_Estudiantes;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,17 +29,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
-import vista.FRM_MantenimientoCursos;
-
-
-
+import vista.FRM_RegistroUsuarios;
 /**
  *
- * @author Lanfor
+ * @author Lanfor y Andy
  */
-public class Metodos_XML_Cursos 
+public class Metodos_XML_Usuarios 
 {
-    FRM_MantenimientoCursos ventana;
+    FRM_RegistroUsuarios ventana;
     DocumentBuilderFactory factory;
     DocumentBuilder builder;
     DOMImplementation implementation;
@@ -54,10 +51,10 @@ public class Metodos_XML_Cursos
     Transformer transformer;
     String nombreArchivo;
     
-    public Metodos_XML_Cursos(FRM_MantenimientoCursos ventana) 
+    public Metodos_XML_Usuarios(FRM_RegistroUsuarios ventana) 
     {
         this.ventana=ventana;  
-        nombreArchivo="Curso";
+        nombreArchivo="Usuario";
         
         if(cargarXML())
         {
@@ -69,7 +66,7 @@ public class Metodos_XML_Cursos
             ventana.mostrarMensaje("No existía un archivo XML creado, ya fue creado y puede proceder a utilizarlo");
         }
         
-        arregloInformacion=new String[4];
+        arregloInformacion=new String[3];
         titulos = new ArrayList();
         valores = new ArrayList();
     }
@@ -107,7 +104,7 @@ public class Metodos_XML_Cursos
             document.getDocumentElement().normalize();
             cargo=true;
             
-            NodeList nList = document.getElementsByTagName("Curso");
+            NodeList nList = document.getElementsByTagName("Usuario");
             Node nNode = nList.item(0);
             raiz = (Element) nNode;
                 
@@ -120,18 +117,18 @@ public class Metodos_XML_Cursos
     {
         try{
             
-            raiz = document.createElement("Curso");
-            principal = document.createElement("Curso");
+            raiz = document.createElement("Usuario");
+            principal = document.createElement("Usuario");
             document.getDocumentElement().appendChild(raiz);
             
-            Element valor1 = document.createElement("sigla");
+            Element valor1 = document.createElement("nombreUsuario");
             Text text = document.createTextNode(arregloInformacion[0]);
-            Element valor2 = document.createElement("nombre");
+            Element valor2 = document.createElement("correo");
             Text text2 = document.createTextNode(arregloInformacion[1]);
-            Element valor3 = document.createElement("creditos");
+            Element valor3 = document.createElement("contrasena");
             Text text3 = document.createTextNode(arregloInformacion[2]);
-            Element valor4 = document.createElement("horario");
-            Text text4 = document.createTextNode(arregloInformacion[3]);
+            Element valor4=document.createElement("tipo");
+            Text text4=document.createTextNode(this.arregloInformacion[3]);
             
             raiz.appendChild(valor1);
             valor1.appendChild(text);
@@ -176,10 +173,10 @@ public class Metodos_XML_Cursos
             Logger.getLogger(Metodos_XML_Estudiantes.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }
-    public boolean consultarInformacionDelXml(String sigla)
+    public boolean consultarInformacionDelXml(String nombreUsuario)
     { 
          Element raiz = document.getDocumentElement();
-            NodeList listaDeItems = raiz.getElementsByTagName("Curso");//Cual es?
+         NodeList listaDeItems = raiz.getElementsByTagName("Estudiante");
          Node tag=null,datoContenido=null;
 
          boolean itemEncontrado=false,tituloCedula=false;
@@ -194,11 +191,11 @@ public class Metodos_XML_Cursos
                  tag = datosItem.item(contadorTags); 
                  datoContenido = tag.getFirstChild();
 
-                 if(tag.getNodeName().equals("sigla") && datoContenido.getNodeValue().equals(""+sigla) )
+                 if(tag.getNodeName().equals("nombreUsuario") && datoContenido.getNodeValue().equals(""+nombreUsuario) )
                  {
                     itemEncontrado=true;     
                  }
-                 if(itemEncontrado && contador<4)//Cual numero pongo
+                 if(itemEncontrado && contador<3)
                  {
                     arregloInformacion[contador]=datoContenido.getNodeValue();
                     contador++;
@@ -208,13 +205,6 @@ public class Metodos_XML_Cursos
          }
          return itemEncontrado;
     }
-//*************** Metodo para ver si hay al menos un Curso guardado en el archivo************//
-    public boolean haveInformatioInXml(String sigla)
-    { 
-        Element raiz = document.getDocumentElement();
-        NodeList listaDeItems = raiz.getElementsByTagName("Curso");//Cual es?
-        return listaDeItems.getLength()>0;
-    }
     public String[] getArregloInformacion()
     {
         return this.arregloInformacion;
@@ -222,7 +212,7 @@ public class Metodos_XML_Cursos
     public void modificarInformacionDelXml(String informacion[])
     { 
          Element raiz = document.getDocumentElement();
-         NodeList listaDeItems = raiz.getElementsByTagName("Curso");
+         NodeList listaDeItems = raiz.getElementsByTagName("Estudiante");
          Node tag=null,datoContenido=null;
          String arregloInformacion[]=new String[3];
          boolean itemEncontrado=false,tituloCedula=false;
@@ -237,7 +227,7 @@ public class Metodos_XML_Cursos
                 {   
                     tag = datosItem.item(contadorTags); 
                     datoContenido = tag.getFirstChild();
-                    if(tag.getNodeName().equals("sigla") && datoContenido.getNodeValue().equals(""+informacion[0]) )
+                    if(tag.getNodeName().equals("nombreUsuario") && datoContenido.getNodeValue().equals(""+informacion[0]) )
                     {   
                        itemEncontrado=true;     
                     }
@@ -260,10 +250,18 @@ public class Metodos_XML_Cursos
             System.err.println("Error al modificar: " + e);
         }
     }
-    public void eliminarInformacionDelXml(String sigla)
+//*************** Metodo para ver si hay al menos un Curso guardado en el archivo************//
+    public boolean haveInformatioInXml()
+    { 
+        Element raiz = document.getDocumentElement();
+        NodeList listaDeItems = raiz.getElementsByTagName("Usuario");
+        
+        return listaDeItems.getLength()>0;
+    }
+    public void eliminarInformacionDelXml(String nombreUsuario)
     { 
          Element raiz = document.getDocumentElement();
-         NodeList listaDeItems = raiz.getElementsByTagName("Estudiante");
+         NodeList listaDeItems = raiz.getElementsByTagName("Usuario");
          Node tag=null,datoContenido=null;
          String arregloInformacion[]=new String[3];
          boolean itemEncontrado=false,tituloCedula=false;
@@ -277,7 +275,7 @@ public class Metodos_XML_Cursos
                 {
                     tag = datosItem.item(contadorTags); 
                     datoContenido = tag.getFirstChild();
-                    if(tag.getNodeName().equals("sigla") && datoContenido.getNodeValue().equals(""+sigla) )
+                    if(tag.getNodeName().equals("nombreUsuario") && datoContenido.getNodeValue().equals(""+nombreUsuario) )
                     {
                        itemEncontrado=true;
                        raiz.removeChild(item);
