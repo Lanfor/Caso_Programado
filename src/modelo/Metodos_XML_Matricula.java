@@ -122,11 +122,11 @@ public class Metodos_XML_Matricula
             
             Element valor1 = document.createElement("codigo");
             Text text = document.createTextNode(arregloInformacion[0]);
-            Element valor2 = document.createElement("sigla");
+            Element valor2 = document.createElement("cedula");
             Text text2 = document.createTextNode(arregloInformacion[1]);
             Element valor3 = document.createElement("nombre");
             Text text3 = document.createTextNode(arregloInformacion[2]);
-            Element valor4 = document.createElement("creditos");
+            Element valor4 = document.createElement("siglas");
             Text text4 = document.createTextNode(arregloInformacion[3]);
             
             raiz.appendChild(valor1);
@@ -174,16 +174,16 @@ public class Metodos_XML_Matricula
     }
     public boolean consultarInformacionDelXml(String codigo,String sigla)
     { 
-         Element raiz = document.getDocumentElement();
-            NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Cual es?
+         Element raiz = document.getDocumentElement();//Devuelve todos los elementos del documento y los guarda en raiz
+            NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Devuelve los elementos de la raiz con esa etiqueta
          Node tag=null,datoContenido=null;
 
          boolean itemEncontrado=false,tituloCedula=false;
          int contador=0;
 
-         for(int contadorItems=0; contadorItems<listaDeItems.getLength(); contadorItems++) 
+         for(int contadorItems=0; contadorItems<listaDeItems.getLength(); contadorItems++)//
          {   
-             Node item = listaDeItems.item(contadorItems);
+             Node item = listaDeItems.item(contadorItems);//Devuelve el primer item de con la etiqueta Matricula
              NodeList datosItem = item.getChildNodes();
              for(int contadorTags=0; contadorTags<datosItem.getLength(); contadorTags++) 
              {           
