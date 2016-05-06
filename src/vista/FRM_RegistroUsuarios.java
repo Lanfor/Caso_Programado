@@ -17,7 +17,7 @@ import modelo.MetodosUsuarios;
 public class FRM_RegistroUsuarios extends javax.swing.JFrame {
 
     
-    Controlador_FRM_RegistroUsuarios controlador_FRM_RegistroUsuarios;
+    public Controlador_FRM_RegistroUsuarios controlador_FRM_RegistroUsuarios;
     MetodosUsuarios metodosUsuarios;
     public FRM_RegistroUsuarios(MetodosUsuarios metodosUsuarios, FRM_VentanaPrincipal frm_VentanaPrincipal) {
         initComponents();
@@ -76,7 +76,7 @@ public class FRM_RegistroUsuarios extends javax.swing.JFrame {
         jp_Contrasena = new javax.swing.JPasswordField();
         jcb_TipoUsuario = new javax.swing.JComboBox<>();
         jl_TipoUsuario = new javax.swing.JLabel();
-        jl_Correo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setTitle("Registro de Usuarios");
         setBackground(new java.awt.Color(51, 102, 255));
@@ -112,7 +112,7 @@ public class FRM_RegistroUsuarios extends javax.swing.JFrame {
         btn_Registrar.setBackground(new java.awt.Color(255, 255, 0));
         btn_Registrar.setText("Registrar");
         getContentPane().add(btn_Registrar);
-        btn_Registrar.setBounds(150, 180, 110, 23);
+        btn_Registrar.setBounds(160, 180, 110, 23);
         getContentPane().add(jp_Contrasena);
         jp_Contrasena.setBounds(150, 110, 150, 30);
 
@@ -128,16 +128,19 @@ public class FRM_RegistroUsuarios extends javax.swing.JFrame {
         getContentPane().add(jl_TipoUsuario);
         jl_TipoUsuario.setBounds(60, 140, 80, 14);
 
-        jl_Correo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/SSJ-Dioses..jpe"))); // NOI18N
-        getContentPane().add(jl_Correo);
-        jl_Correo.setBounds(40, 20, 280, 180);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/FondoMiPaguinaWeb.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 370, 230);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
        System.out.println("Salio ventana Usuario");
-        metodosUsuarios.escribirSobreArchivo();
+       if(controlador_FRM_RegistroUsuarios.controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento().equalsIgnoreCase("Archivo Plano"))
+       {
+           metodosUsuarios.escribirSobreArchivo();
+       }
     }//GEN-LAST:event_formComponentHidden
 
     /**
@@ -147,10 +150,10 @@ public class FRM_RegistroUsuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Registrar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox<String> jcb_TipoUsuario;
     private javax.swing.JLabel jl_Contrasena;
-    private javax.swing.JLabel jl_Correo;
     private javax.swing.JLabel jl_NombUsuario;
     private javax.swing.JLabel jl_TipoUsuario;
     private javax.swing.JPasswordField jp_Contrasena;

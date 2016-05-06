@@ -46,7 +46,6 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
         this.jm_Cursos.setEnabled(true);
         this.jm_Matricula.setEnabled(true);
         this.jm_LogIn.setEnabled(true);
-        this.jm_BaseDatos.setEnabled(true);
     }
     public void soyAdimistrador()
     {
@@ -78,8 +77,8 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
         jm_Estudiantes = new javax.swing.JMenuItem();
         jm_Cursos = new javax.swing.JMenuItem();
         jm_Matricula = new javax.swing.JMenuItem();
-        jm_TipoAlmacenamiento = new javax.swing.JMenu();
-        jm_BaseDatos = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jm_TipoAlmacenamiento = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,13 +112,12 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
 
         jm_BarraMenu.add(jm_Mantenimientos);
 
-        jm_TipoAlmacenamiento.setText("Configuracion");
-        jm_TipoAlmacenamiento.setActionCommand("Tipo Almacenamiento");
+        jMenu1.setText("Configuración");
 
-        jm_BaseDatos.setText("Tipo Almacenamiento");
-        jm_TipoAlmacenamiento.add(jm_BaseDatos);
+        jm_TipoAlmacenamiento.setText("Tipo de Almacenamiento");
+        jMenu1.add(jm_TipoAlmacenamiento);
 
-        jm_BarraMenu.add(jm_TipoAlmacenamiento);
+        jm_BarraMenu.add(jMenu1);
 
         setJMenuBar(jm_BarraMenu);
 
@@ -176,16 +174,16 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JLabel jl_Fondo;
     private javax.swing.JMenu jm_Archivo;
     private javax.swing.JMenuBar jm_BarraMenu;
-    private javax.swing.JMenuItem jm_BaseDatos;
     private javax.swing.JMenuItem jm_Cursos;
     private javax.swing.JMenuItem jm_Estudiantes;
     private javax.swing.JMenuItem jm_LogIn;
     private javax.swing.JMenu jm_Mantenimientos;
     private javax.swing.JMenuItem jm_Matricula;
     private javax.swing.JMenuItem jm_Salir;
-    private javax.swing.JMenu jm_TipoAlmacenamiento;
+    private javax.swing.JMenuItem jm_TipoAlmacenamiento;
     // End of variables declaration//GEN-END:variables
 }

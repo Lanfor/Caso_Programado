@@ -58,15 +58,14 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jm_TipoAlmacenamiento">
+        <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Configuracion"/>
-            <Property name="actionCommand" type="java.lang.String" value="Tipo Almacenamiento"/>
+            <Property name="text" type="java.lang.String" value="Configuraci&#xf3;n"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jm_BaseDatos">
+            <MenuItem class="javax.swing.JMenuItem" name="jm_TipoAlmacenamiento">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tipo Almacenamiento"/>
+                <Property name="text" type="java.lang.String" value="Tipo de Almacenamiento"/>
               </Properties>
             </MenuItem>
           </SubComponents>

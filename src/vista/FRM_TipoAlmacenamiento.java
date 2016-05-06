@@ -35,9 +35,17 @@ public class FRM_TipoAlmacenamiento extends javax.swing.JFrame {
         btn_Aceptar.addActionListener(controlador_FRM_TipoAlmacenamiento);
         btn_Cancelar.addActionListener(controlador_FRM_TipoAlmacenamiento);
     }
-    public String getSeletedItemCombo()
+    public boolean selecionArchivoPlano()
     {
-        return btng_TipoAlmacenamiento.getSelection().getActionCommand();
+        return jrb_ArchivoPlano.isSelected();
+    }
+    public boolean selecionArchivoXML()
+    {
+        return jrb_ArchivoXML.isSelected();
+    }
+    public boolean selecionBD()
+    {
+        return jrb_BD.isSelected();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +72,7 @@ public class FRM_TipoAlmacenamiento extends javax.swing.JFrame {
         btng_TipoAlmacenamiento.add(jrb_ArchivoPlano);
         jrb_ArchivoPlano.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jrb_ArchivoPlano.setForeground(new java.awt.Color(204, 204, 204));
+        jrb_ArchivoPlano.setSelected(true);
         jrb_ArchivoPlano.setText("Archivos Planos");
         jrb_ArchivoPlano.setBorderPainted(true);
         getContentPane().add(jrb_ArchivoPlano);

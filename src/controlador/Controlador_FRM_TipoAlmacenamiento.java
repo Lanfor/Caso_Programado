@@ -31,7 +31,28 @@ public class Controlador_FRM_TipoAlmacenamiento implements ActionListener
             case "Aceptar":
 //                System.out.println("Aceptar");
                 controlador_FRM_VentanaPrincipal.frm_VentanaPrincipal.show();
-                break;
+                    if(frm_TipoAlmacenamiento.selecionArchivoPlano())
+                    {
+                        controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Archivo Plano");
+                        controlador_FRM_VentanaPrincipal.metodosUsuarios.cargarArray();
+                        if(controlador_FRM_VentanaPrincipal.metodosUsuarios.getTamano()==0)
+                            controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show();
+                        else
+                            controlador_FRM_VentanaPrincipal.frm_LogIn.show();
+                    }
+                    else if(frm_TipoAlmacenamiento.selecionArchivoXML())
+                        controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Archivo XML");
+                    else
+                    {
+                        controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Base de Datos");
+                        if(controlador_FRM_VentanaPrincipal.conexionBD.haveUsers())
+                        controlador_FRM_VentanaPrincipal.frm_LogIn.show();
+                        else
+                             controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show();
+                    }
+                frm_TipoAlmacenamiento.dispose();
+            break;
+//*******************************************************************************************************************************//
             case "Cancelar":
                 frm_TipoAlmacenamiento.dispose();
                 break;

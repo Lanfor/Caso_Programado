@@ -24,9 +24,12 @@ public class MetodosUsuarios
     {
         archivosUsuarios=new ArchivosUsuarios();
         arrayUsuario=new ArrayList<Usuario>();
-        arrayUsuario=archivosUsuarios.leerInformacionCompleta();            
     }
     
+    public void cargarArray()
+    {
+         arrayUsuario=archivosUsuarios.leerInformacionCompleta();
+    }
     public void agregarUsuario(String informacion[])
     {
         Usuario objeto=new Usuario(informacion[0], informacion[1], informacion[2], informacion[3]);
