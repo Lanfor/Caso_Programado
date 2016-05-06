@@ -8,6 +8,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import modelo.ConexionBD;
 import modelo.MetodosEstudiantes;
 import vista.FRM_MantenimientoEstudiantes;
 
@@ -20,6 +21,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
     public MetodosEstudiantes metodosEstudiantes;
     
     FRM_MantenimientoEstudiantes frm_MantenimientoEstudiantes;
+    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     
     public Controlador_FRM_MantenimientoEstudiantes(FRM_MantenimientoEstudiantes frm_MantenimientoEstudiantes, MetodosEstudiantes metodosEstudiantes)
     {
@@ -31,11 +33,25 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
     {
         if(e.getActionCommand().equals("Agregar"))
         {
-            metodosEstudiantes.agregarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue registrado de forma correcta");
-            frm_MantenimientoEstudiantes.resetearGUI();
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    registarConArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    registarConBD();
+                break;
+                default:
+                    frm_MantenimientoEstudiantes.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
+            
             
         }
+        
         if(e.getActionCommand().equals("Consultar") || e.getActionCommand().equals("Consulta_Rapida"))
         {            
             buscar();
@@ -69,5 +85,67 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 else
                 frm_MantenimientoEstudiantes.resetearGUI();
             }
-    }  
+    } 
+    
+    
+    public void registarConArchivosPlanos()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+                if(controlador_FRM_VentanaPrincipal.vericar.verificarLetras(frm_MantenimientoEstudiantes.devolverInformacion()[1]))
+                {
+                    if(!controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
+                    {
+                            metodosEstudiantes.agregarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
+                            frm_MantenimientoEstudiantes.mostrarMensaje("Usuario registrado con exito");
+                            frm_MantenimientoEstudiantes.resetearGUI();   
+                    }
+                    else
+                    {
+                        
+                        frm_MantenimientoEstudiantes.mostrarMensaje("Debe digitar una direccion");
+                    }
+                }
+                else
+                {
+                    frm_MantenimientoEstudiantes.mostrarMensaje("El nombre de usuario debe contener solo letras"); 
+                }         
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula solo puede contener numeros"); 
+        }
+    }//fin del metodo agregar con archivos planos
+    
+    public void registarConBD()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+                if(controlador_FRM_VentanaPrincipal.vericar.verificarLetras(frm_MantenimientoEstudiantes.devolverInformacion()[1]))
+                {
+                    if(!controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
+                    {
+                            controlador_FRM_VentanaPrincipal.conexionBD.registrarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
+                            frm_MantenimientoEstudiantes.mostrarMensaje("Usuario registrado con exito");
+                            frm_MantenimientoEstudiantes.resetearGUI();   
+                    }
+                    else
+                    {
+                        
+                        frm_MantenimientoEstudiantes.mostrarMensaje("Debe digitar una direccion");
+                    }
+                }
+                else
+                {
+                    frm_MantenimientoEstudiantes.mostrarMensaje("El nombre de usuario debe contener solo letras"); 
+                }         
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula solo puede contener numeros"); 
+        }
+    }//fin del metodo agregar con BD
+    
+    
+    
 }

@@ -58,6 +58,16 @@ public class FRM_RegistroUsuarios extends javax.swing.JFrame {
         jp_Contrasena.setText("");
         jcb_TipoUsuario.setSelectedIndex(0);
     }
+    
+    public String getCorreo()
+    {
+        return jt_Correo.getText();
+    }
+    
+    public String getContrasena()
+    {
+        return jp_Contrasena.getText();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
