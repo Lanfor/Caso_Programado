@@ -49,26 +49,34 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
             }
         }
     }
+    public void registrarConXML()
+    {
+        
+    }
     public  void registrarConBD()
     { 
-        if(!conexionBD.consultarUsuario(frm_RegistroUsuarios.devolverInformacion()[0]))
-        {
-            conexionBD.registrarUsuario(frm_RegistroUsuarios.devolverInformacion());
-            frm_RegistroUsuarios.usuarioNegro();
-            frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito");
-            frm_RegistroUsuarios.resetearVentana();
-            frm_RegistroUsuarios.hide();
-            frm_VentanaPrincipal.show();
-        }
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarLetras(frm_RegistroUsuarios.devolverInformacion()[0]))
+            if(!conexionBD.consultarUsuario(frm_RegistroUsuarios.devolverInformacion()[0]))
+            {
+                conexionBD.registrarUsuario(frm_RegistroUsuarios.devolverInformacion());
+                frm_RegistroUsuarios.usuarioNegro();
+                frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito");
+                frm_RegistroUsuarios.resetearVentana();
+                frm_RegistroUsuarios.hide();
+                frm_VentanaPrincipal.show();
+            }
+            else
+            {
+                frm_RegistroUsuarios.mostrarMensaje("Este nombre de usuario ya existe");
+                frm_RegistroUsuarios.usuarioRojo();
+            }
         else
-        {
-            frm_RegistroUsuarios.mostrarMensaje("Este nombre de usuario ya existe");
-            frm_RegistroUsuarios.usuarioRojo();
-        }
+            frm_RegistroUsuarios.mostrarMensaje("El nombre de usuario debe contener solo letras");
     }
     public void registarConArchivosPlanos()
     {
-         if(!metodosUsuarios.consultarUsuario(frm_RegistroUsuarios.devolverInformacion()[0]))
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarLetras(frm_RegistroUsuarios.devolverInformacion()[0]))
+            if(!metodosUsuarios.consultarUsuario(frm_RegistroUsuarios.devolverInformacion()[0]))
             {
                 metodosUsuarios.agregarUsuario(frm_RegistroUsuarios.devolverInformacion());
                 frm_RegistroUsuarios.usuarioNegro();
@@ -82,6 +90,8 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
                 frm_RegistroUsuarios.mostrarMensaje("Este nombre de usuario ya existe");
                 frm_RegistroUsuarios.usuarioRojo();
             }
+        else
+            frm_RegistroUsuarios.mostrarMensaje("El nombre de usuario debe contener solo letras");
     }
     
 }

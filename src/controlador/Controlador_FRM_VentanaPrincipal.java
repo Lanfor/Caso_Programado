@@ -11,6 +11,7 @@ import modelo.ConexionBD;
 import modelo.MetodosCursos;
 import modelo.MetodosEstudiantes;
 import modelo.MetodosUsuarios;
+import modelo.Verificar;
 import vista.FRM_LogIn;
 import vista.FRM_MantenimientoCursos;
 import vista.FRM_MantenimientoEstudiantes;
@@ -45,10 +46,11 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
     ConexionBD conexionBD;
     String TipoAlmacenamiento="";
     
-    
+    public Verificar vericar;
             
     public Controlador_FRM_VentanaPrincipal(FRM_VentanaPrincipal frm_VentanaPrincipal)
     {
+        vericar=new Verificar();
         conexionBD=new ConexionBD();
         this.frm_VentanaPrincipal=frm_VentanaPrincipal;
         metodosEstudiantes=new MetodosEstudiantes();

@@ -42,6 +42,9 @@ public class Controlador_FRM_TipoAlmacenamiento implements ActionListener
                     }
                     else if(frm_TipoAlmacenamiento.selecionArchivoXML())
                         controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Archivo XML");
+                    /*  
+                        controlador_FRM_VentanaPrincipal.metodos_XML_Usuarios.cargar
+                    */
                     else
                     {
                         controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Base de Datos");
