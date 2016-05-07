@@ -18,7 +18,7 @@ public class Verificar
         boolean esNumero = true;
         for (int i = 0; i < texto.length(); i++)
         {
-            if(!Character.isDigit(Integer.parseInt(texto.charAt(i)+"")))
+            if(!Character.isDigit(texto.charAt(i)))
             {
                 esNumero = false;
                 break;
