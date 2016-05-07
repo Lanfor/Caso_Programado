@@ -47,9 +47,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 default:
                     frm_MantenimientoEstudiantes.mostrarMensaje("Error 407 ha fallado el sistema");
             }
-            
-            
-        }
+        }//fin del action command agregar
         
         if(e.getActionCommand().equals("Consultar") || e.getActionCommand().equals("Consulta_Rapida"))
         {      
@@ -106,8 +104,8 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 default:
                     frm_MantenimientoEstudiantes.mostrarMensaje("Error 407 ha fallado el sistema");
             }
-        }
-    }
+        }//fin del action command Eliminar
+    }//fin del 
     public void buscarArchivosPlanos()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
