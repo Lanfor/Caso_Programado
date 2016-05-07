@@ -153,6 +153,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         else
         {
             frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener numeros");
+            frm_MantenimientoEstudiantes.resetearGUI();
         }
     } //fin del metodo buscar en BD
     
