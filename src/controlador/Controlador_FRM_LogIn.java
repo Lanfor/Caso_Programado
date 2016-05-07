@@ -84,6 +84,9 @@ public class Controlador_FRM_LogIn implements ActionListener
                         frm_Ventana_LogIn.soyDesarrollador();
                         frm_Ventana_LogIn.habitarRegistro();
                     break;
+                    default:
+                        frm_Ventana_LogIn.mostrarMensaje("No se encontró el tipo de este usuario");
+                        break;
                 }
                 frm_Ventana_LogIn.limpiar();
                 frm_Ventana_LogIn.dispose();
@@ -107,7 +110,7 @@ public class Controlador_FRM_LogIn implements ActionListener
         //NO encuentra el usuario con XML
         if(frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverUsuario()) && frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverContraseña()))
         {
-            if(metodos_XML_Usuarios.consultarInformacionDelXml(frm_Ventana_LogIn.devolverUsuario()) && metodos_XML_Usuarios.getArregloInformacion()[3].equalsIgnoreCase(frm_Ventana_LogIn.devolverContraseña()))
+            if(metodos_XML_Usuarios.consultarInformacionDelXml(frm_Ventana_LogIn.devolverUsuario()) && metodos_XML_Usuarios.getArregloInformacion()[2].equalsIgnoreCase(frm_Ventana_LogIn.devolverContraseña()))
             {
                 frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"* + * + * + * + * + * + * + "+metodos_XML_Usuarios.getArregloInformacion()[3]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
                 if(metodos_XML_Usuarios.getArregloInformacion()[3].equalsIgnoreCase("Administrador"))
@@ -128,7 +131,11 @@ public class Controlador_FRM_LogIn implements ActionListener
                         {
                             frm_Ventana_LogIn.soyDesarrollador();
                             frm_Ventana_LogIn.habitarRegistro();
-                        }   
+                        }
+                        else
+                        {
+                            frm_Ventana_LogIn.mostrarMensaje("No se encontró el tipo de este usuario");
+                        }
                     }
                 }
                 frm_Ventana_LogIn.limpiar();
@@ -172,7 +179,9 @@ public class Controlador_FRM_LogIn implements ActionListener
                         {
                             frm_Ventana_LogIn.soyDesarrollador();
                             frm_Ventana_LogIn.habitarRegistro();
-                        }   
+                        }
+                        else
+                            frm_Ventana_LogIn.mostrarMensaje("No se encontró el tipo de este usuario");
                     }
                 }
                 frm_Ventana_LogIn.limpiar();
@@ -191,7 +200,4 @@ public class Controlador_FRM_LogIn implements ActionListener
         else
             frm_Ventana_LogIn.mostrarMensaje("Debes digitar un nombre de usuario y una conotraseña para poder ingresar");
     }
- 
-    
-    
 }
