@@ -16,6 +16,7 @@ import vista.FRM_VentanaPrincipal;
  *
  * @author Lanfor
  */
+
 public class Controlador_FRM_RegistroUsuarios implements ActionListener{
     
     MetodosUsuarios metodosUsuarios;

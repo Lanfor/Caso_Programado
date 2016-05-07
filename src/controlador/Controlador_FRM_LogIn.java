@@ -18,6 +18,7 @@ import vista.FRM_VentanaPrincipal;
  *
  * @author Lanfor
  */
+
 public class Controlador_FRM_LogIn implements ActionListener
 {
     FRM_LogIn frm_Ventana_LogIn;

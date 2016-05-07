@@ -19,9 +19,8 @@ import vista.FRM_MantenimientoEstudiantes;
 public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
     
     public MetodosEstudiantes metodosEstudiantes;
-    
     FRM_MantenimientoEstudiantes frm_MantenimientoEstudiantes;
-    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
+    public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     
     public Controlador_FRM_MantenimientoEstudiantes(FRM_MantenimientoEstudiantes frm_MantenimientoEstudiantes, MetodosEstudiantes metodosEstudiantes)
     {
