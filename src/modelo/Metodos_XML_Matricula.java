@@ -187,12 +187,18 @@ public class Metodos_XML_Matricula
              NodeList datosItem = item.getChildNodes();//Devuelve todos los Elemetos dentro de Matricula
              for(int contadorTags=0; contadorTags<datosItem.getLength(); contadorTags++) 
              {           
-                 tag = datosItem.item(contadorTags);//devuelve
-                 datoContenido = tag.getFirstChild();//
+                 tag = datosItem.item(contadorTags);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                 datoContenido = tag.getFirstChild();//devuelve el dato de la cedula
 
                  if(tag.getNodeName().equals("codigo") && datoContenido.getNodeValue().equals(""+codigo) )
                  {
-                    itemEncontrado=true;     
+                    tag = datosItem.item(contadorTags+3);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                    datoContenido = tag.getFirstChild();//devuelve el dato del item que esté seleccionado
+                    
+                    if(tag.getNodeName().equals("sigla") && datoContenido.getNodeValue().equals(""+sigla))
+                    {
+                        itemEncontrado=true;  
+                    }
                  }
                  if(itemEncontrado && contador<4)//Cual numero pongo
                  {
