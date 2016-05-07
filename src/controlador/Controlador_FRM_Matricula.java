@@ -24,12 +24,15 @@ public class Controlador_FRM_Matricula implements ActionListener
     public MetodosCursos metodosCursos;
     public MetodosMatriculas metodosMatriculas;
     boolean verificarEstudiante=false, verificarCurso=false;
+    public Controlador_FRM_VentanaPrincipal controlador;
     
-    public Controlador_FRM_Matricula(FRM_Matricula fRM_Matricula, MetodosEstudiantes metodosEstudiantes, MetodosCursos metodosCursos) {
+    public Controlador_FRM_Matricula(FRM_Matricula fRM_Matricula, MetodosEstudiantes metodosEstudiantes, MetodosCursos metodosCursos) 
+    {
         this.frm_Matricula = fRM_Matricula;
         this.metodosEstudiantes=metodosEstudiantes;
         this.metodosCursos=metodosCursos;
         this.metodosMatriculas=new MetodosMatriculas(this, this.metodosCursos,this.metodosEstudiantes);
+        controlador = frm_Matricula.controlador_FRM_VentanaPrincipal;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class Controlador_FRM_Matricula implements ActionListener
         if(e.getActionCommand().equalsIgnoreCase("ConsultarEstudiante"))
         {
             frm_Matricula.enviarControlPrincipal();
-             switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+             switch(controlador.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     buscarEstudianteEnArchivosPlanos();
