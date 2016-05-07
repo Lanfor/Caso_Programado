@@ -37,8 +37,23 @@ public class Controlador_FRM_Matricula implements ActionListener
     {
         if(e.getActionCommand().equalsIgnoreCase("ConsultarEstudiante"))
         {
-            buscarEstudiante();
+             switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    buscarEstudianteEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
+        
         if(e.getActionCommand().equalsIgnoreCase("ConsultarCurso"))
         {
             buscarCurso();
@@ -83,7 +98,7 @@ public class Controlador_FRM_Matricula implements ActionListener
     
     
     
-    public void buscarEstudiante()
+    public void buscarEstudianteEnArchivosPlanos()
     {
         if(metodosEstudiantes.consultarEstudiante(frm_Matricula.devolverCedula()))
         {
@@ -97,7 +112,8 @@ public class Controlador_FRM_Matricula implements ActionListener
             frm_Matricula.mostrarMensaje("La cédula buscada no se encuentra.");
             frm_Matricula.resetearGUI();
         }
-    }
+    }//fin del metodo buscar Estudiante
+    
     public void buscarCurso()
     {
         if(metodosCursos.consultarCurso(frm_Matricula.devolverSigla()))
