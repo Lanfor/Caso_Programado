@@ -53,25 +53,67 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         }
         
         if(e.getActionCommand().equals("Consultar") || e.getActionCommand().equals("Consulta_Rapida"))
-        {            
-            buscar();
-        }
+        {      
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    buscarArchivosPlanos();
+                break;
+
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                      buscarEnBD();
+                break;
+                default:
+                    frm_MantenimientoEstudiantes.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
+        }//fin del actionCommand Consultar
+        
         if(e.getActionCommand().equals("Modificar"))
         {
-            metodosEstudiantes.modificarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta.");
-            frm_MantenimientoEstudiantes.resetearGUI();
-        }
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    modificarArchivosPlanos();
+                break;
+
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                     modificarEnBD();
+                break;
+                default:
+                    frm_MantenimientoEstudiantes.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
+        }//fin del ActionCommand Modificar
+        
         if(e.getActionCommand().equals("Eliminar"))
         {
-            metodosEstudiantes.eliminarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue eliminado de forma correcta.");
-            frm_MantenimientoEstudiantes.resetearGUI();
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    eliminarEnArchivosPlanos();
+                break;
+
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                     eliminarEnBD();
+                break;
+                default:
+                    frm_MantenimientoEstudiantes.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
     }
-    public void buscar()
+    public void buscarArchivosPlanos()
     {
-        if(metodosEstudiantes.consultarEstudiante(frm_MantenimientoEstudiantes.devolverCedula()))
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            if(metodosEstudiantes.consultarEstudiante(frm_MantenimientoEstudiantes.devolverCedula()))
             {
                 frm_MantenimientoEstudiantes.mostrarInformacion(metodosEstudiantes.getArregloInformacion());
                 frm_MantenimientoEstudiantes.habilitarEdicion();
@@ -85,8 +127,37 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 else
                 frm_MantenimientoEstudiantes.resetearGUI();
             }
-    } 
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener numeros");
+        }
+    }//fin del metodo buscar en archivos planos 
     
+    public void buscarEnBD()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            if(controlador_FRM_VentanaPrincipal.conexionBD.consultarEstudiante(frm_MantenimientoEstudiantes.devolverCedula()))
+            {
+                frm_MantenimientoEstudiantes.mostrarInformacion(controlador_FRM_VentanaPrincipal.conexionBD.getArregloEstudiantes());
+                frm_MantenimientoEstudiantes.habilitarEdicion();
+            }
+            else
+            {
+                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                System.out.println("Me devuelve "+ valor);
+                if(valor==0)
+                frm_MantenimientoEstudiantes.habilitarAgregar();
+                else
+                frm_MantenimientoEstudiantes.resetearGUI();
+            }
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener numeros");
+        }
+    } //fin del metodo buscar en BD
     
     public void registarConArchivosPlanos()
     {
@@ -147,5 +218,61 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
     }//fin del metodo agregar con BD
     
     
+    public void modificarArchivosPlanos()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            metodosEstudiantes.modificarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoEstudiantes.resetearGUI();
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+        }
+               
+    }//fin del metodo modificar en archivos planos
     
-}
+    public void modificarEnBD()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            controlador_FRM_VentanaPrincipal.conexionBD.modificarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoEstudiantes.resetearGUI();
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+        }
+    }//fin del metodo modificar en BD
+    
+    public void eliminarEnArchivosPlanos()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            metodosEstudiantes.eliminarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue eliminado de forma correcta.");
+            frm_MantenimientoEstudiantes.resetearGUI();
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+        }
+    }//fin del metodo eliminar en Archivos Planos
+    
+    public void eliminarEnBD()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            controlador_FRM_VentanaPrincipal.conexionBD.eliminarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoEstudiantes.resetearGUI();
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+        }
+    }//fin de la clase eliminar en BD
+    
+}//fin de la clase controlador FRM_MantenimeientoEstudiantes
