@@ -192,18 +192,13 @@ public class ConexionBD {
         boolean existo = false;
         try {
                 cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `cursos` WHERE sigla="+sigla);
+                rs = cmd.executeQuery("SELECT * FROM `cursos` WHERE sigla='"+sigla+"'");
                 
                 while (rs.next()) 
                 {
-                    
-                    /*String nombre = rs.getString("nombre");
-                    int creditos = rs.getInt("creditos");
-                    String horario = rs.getString("horario");*/
                     arregloCursos[0] = rs.getString("nombre");
                     arregloCursos[1] = Integer.toString(rs.getInt("creditos"));
                     arregloCursos[2] = rs.getString("horario");
-                   // System.out.println("Información de la BD:\n\nNombre: "+nombre+"\nSigla: "+sigla+"\nCreditos: "+creditos+"\nHorario: "+horario); 
                     existo = true;
                 }
                 rs.close();

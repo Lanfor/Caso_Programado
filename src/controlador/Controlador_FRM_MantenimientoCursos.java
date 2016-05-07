@@ -165,7 +165,6 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
             else
             {
                 int valor=frm_MantenimientoCursos.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
-                System.out.println("Me devuelve "+ valor);
                 if(valor==0)
                 frm_MantenimientoCursos.habilitarAgregar();
                 else
