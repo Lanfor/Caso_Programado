@@ -29,6 +29,10 @@ public class FRM_Matricula extends javax.swing.JFrame {
         colocarCodigo();
         agregarEventos();
     }
+    public void enviarControlPrincipal()
+    {
+        this.panel_InformacionMatricula1.recibirControlPrincipal(controlador_FRM_VentanaPrincipal);
+    }
     public  void agregarEventos()
     {
         panel_InformacionMatricula1.agregarEventosMatricula(controlador);

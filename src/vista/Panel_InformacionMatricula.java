@@ -6,6 +6,8 @@
 package vista;
 
 import controlador.Controlador_FRM_Matricula;
+import controlador.Controlador_FRM_VentanaPrincipal;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +20,7 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     Controlador_FRM_Matricula controlador;
-    
+    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public Panel_InformacionMatricula() {
         initComponents();
         modelo=new DefaultTableModel();
@@ -128,6 +130,10 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
     public void borrarFila()
     {
         modelo.removeRow(tbl_Tabla.getSelectedRow());
+    }
+    public void recibirControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
+    {
+        this.controlador_FRM_VentanaPrincipal=controlador_FRM_VentanaPrincipal;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -291,7 +297,21 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
     private void jt_CedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_CedulaKeyPressed
         if(evt.getKeyCode()==10)
         {
-            this.controlador.buscarEstudiante();
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    controlador.buscarEstudianteEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    controlador.buscarEstudianteEnBD();
+                break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");
+            }
         } 
     }//GEN-LAST:event_jt_CedulaKeyPressed
 

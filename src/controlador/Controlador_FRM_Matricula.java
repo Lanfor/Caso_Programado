@@ -37,6 +37,7 @@ public class Controlador_FRM_Matricula implements ActionListener
     {
         if(e.getActionCommand().equalsIgnoreCase("ConsultarEstudiante"))
         {
+            frm_Matricula.enviarControlPrincipal();
              switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":

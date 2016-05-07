@@ -6,6 +6,8 @@
 package vista;
 
 import controlador.Controlador_FRM_MantenimientoCursos;
+import controlador.Controlador_FRM_VentanaPrincipal;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +20,7 @@ public class Panel_Cursos extends javax.swing.JPanel
      * Creates new form Panel_Cursos
      */
     Controlador_FRM_MantenimientoCursos controlador;
+    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public Panel_Cursos() 
     {
         initComponents();
@@ -80,7 +83,10 @@ public class Panel_Cursos extends javax.swing.JPanel
         
         return informacion;
     }
-    
+    public void recibirControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
+    {
+        this.controlador_FRM_VentanaPrincipal=controlador_FRM_VentanaPrincipal;
+    }
     public void deshabilitarCampos()
     {
         this.jt_Siglas.setEnabled(true);
@@ -192,7 +198,21 @@ public class Panel_Cursos extends javax.swing.JPanel
 
     private void jt_SiglasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_SiglasKeyPressed
         if(evt.getKeyCode()==10)
-        this.controlador.buscar();
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    controlador.buscarEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    controlador.buscarEnBD();
+                break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");
+            }
     }//GEN-LAST:event_jt_SiglasKeyPressed
 
 

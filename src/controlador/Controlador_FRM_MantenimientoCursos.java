@@ -48,6 +48,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
         if(evento.getActionCommand().equals("Consultar") || evento.getActionCommand().equals("ConsultaRapida"))
         {
+            frm_MantenimientoCursos.enviarControlPricipal();
             switch(controlador.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
