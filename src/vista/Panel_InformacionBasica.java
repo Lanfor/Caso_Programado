@@ -148,7 +148,7 @@ public class Panel_InformacionBasica extends javax.swing.JPanel {
         
       if(evt.getKeyCode()==10)
         {
-            this.controlador.buscar();
+            this.controlador.buscarArchivosPlanos();
         }  
     }//GEN-LAST:event_jt_CedulaKeyPressed
 

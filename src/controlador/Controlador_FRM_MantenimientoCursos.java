@@ -29,9 +29,21 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     {
         if(evento.getActionCommand().equals("Agregar"))
         {
-           metodosCursos.agregarCursos(frm_MantenimientoCursos.devolverInformacion());
-           frm_MantenimientoCursos.mostrarMensaje("El estudiante fue registrado de forma correcta");
-           frm_MantenimientoCursos.resetearGUI();
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    registrarEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    frm_MantenimientoCursos.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
         
         if(evento.getActionCommand().equals("Consultar") || evento.getActionCommand().equals("ConsultaRapida"))
@@ -53,6 +65,19 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
     }
     
+    public void registrarEnArchivosPlanos()
+    {
+           metodosCursos.agregarCursos(frm_MantenimientoCursos.devolverInformacion());
+           frm_MantenimientoCursos.mostrarMensaje("El estudiante fue registrado de forma correcta");
+           frm_MantenimientoCursos.resetearGUI();
+    }//fin del metodo agregar en Archivos Planos
+    
+     public void registarConBD()
+    {
+        controlador_FRM_VentanaPrincipal.conexionBD.registrarCursos(frm_MantenimientoCursos.devolverInformacion());
+        frm_MantenimientoCursos.mostrarMensaje("Usuario registrado con exito");
+        frm_MantenimientoCursos.resetearGUI();   
+    }//fin del metodo agregar con BD
     
     public void buscar()
     {
@@ -71,4 +96,6 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                 frm_MantenimientoCursos.resetearGUI();
             }
     }
-}
+    
+    
+}//fin de la clase Controlador_FRM_MantenimientoCursos

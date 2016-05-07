@@ -66,20 +66,30 @@ public class ConexionBD {
         }
         
     }
-    public void consultarEstudiante(String cedula)
+    
+    String arregloEstudiantes[] = new String[2];
+    
+    public String[] getArregloEstudiantes()
+    {
+        return arregloEstudiantes;
+    }
+    public boolean consultarEstudiante(String cedula)
     {
         ResultSet rs = null;
         Statement cmd = null;
-
+        boolean existo=false;
         try {
                 cmd = con.createStatement();
                 rs = cmd.executeQuery("SELECT * FROM `estudiantes` WHERE cedula="+cedula);
                 
                 while (rs.next()) 
                 {
-                    String nombre = rs.getString("nombre");
-                    String direccion = rs.getString("direccion");
-                    System.out.println("Información de la BD:\n\nNombre: "+nombre+"\nCedula: "+cedula+"\nDireccion: "+direccion); 
+//                    String nombre = rs.getString("nombre");
+//                    String direccion = rs.getString("direccion");
+//                    System.out.println("Información de la BD:\n\nNombre: "+nombre+"\nCedula: "+cedula+"\nDireccion: "+direccion); 
+                      arregloEstudiantes[0]= rs.getString("nombre");
+                      arregloEstudiantes[1]= rs.getString("direccion");
+                      existo = true;
                 }
                 rs.close();
         }
@@ -87,6 +97,7 @@ public class ConexionBD {
         {
             System.out.println("SQLException ejecutando sentencia: " + e.getMessage());
         }
+        return existo;
     }
     public boolean modificarEstudiante(String[] arreglo)
     {
