@@ -307,7 +307,7 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    controlador.buscarEstudianteEnBD();
+                    
                 break;
                 default:
                     JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");
@@ -318,7 +318,21 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
     private void jt_SiglaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_SiglaKeyPressed
         if(evt.getKeyCode()==10)
         {
-            this.controlador.buscarCurso();
+            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    controlador.buscarCursoEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");
+            }
         }
     }//GEN-LAST:event_jt_SiglaKeyPressed
 
@@ -327,7 +341,21 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
         jt_Cedula.setText(""+modelo.getValueAt(tbl_Tabla.getSelectedRow(), 1));
         jt_NombEstudiante.setText(""+modelo.getValueAt(tbl_Tabla.getSelectedRow(), 2));
         jt_Sigla.setText(""+modelo.getValueAt(tbl_Tabla.getSelectedRow(), 3));
-        controlador.buscarCurso();
+        switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    controlador.buscarCursoEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");
+            }
         controlador.frm_Matricula.hablitarEdicion();
     }//GEN-LAST:event_tbl_TablaMouseClicked
     
