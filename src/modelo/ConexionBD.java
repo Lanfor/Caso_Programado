@@ -84,12 +84,9 @@ public class ConexionBD {
                 
                 while (rs.next()) 
                 {
-//                    String nombre = rs.getString("nombre");
-//                    String direccion = rs.getString("direccion");
-//                    System.out.println("Información de la BD:\n\nNombre: "+nombre+"\nCedula: "+cedula+"\nDireccion: "+direccion); 
-                      arregloEstudiantes[0]= rs.getString("nombre");
-                      arregloEstudiantes[1]= rs.getString("direccion");
-                      existo = true;
+                    arregloEstudiantes[0]= rs.getString("nombre");
+                    arregloEstudiantes[1]= rs.getString("direccion");
+                    existo = true;
                 }
                 rs.close();
         }
@@ -101,12 +98,10 @@ public class ConexionBD {
     }
     public boolean modificarEstudiante(String[] arreglo)
     {
-        ResultSet rs = null;
         Statement cmd = null;
-        boolean ejecuto;
         try {
                 cmd = con.createStatement();
-                ejecuto = cmd.execute("UPDATE `estudiantes` SET `cedula`='"+arreglo[0]+"',`nombre`='"+arreglo[1]+"',`direccion`='"+arreglo[2]+"' WHERE cedula='"+arreglo[0]+"'");
+                cmd.execute("UPDATE `estudiantes` SET `cedula`='"+arreglo[0]+"',`nombre`='"+arreglo[1]+"',`direccion`='"+arreglo[2]+"' WHERE cedula='"+arreglo[0]+"'");
                 
                return true;
                // rs.close();
