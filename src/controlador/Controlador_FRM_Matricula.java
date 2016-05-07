@@ -41,7 +41,7 @@ public class Controlador_FRM_Matricula implements ActionListener
         if(e.getActionCommand().equalsIgnoreCase("ConsultarEstudiante"))
         {
             frm_Matricula.enviarControlPrincipal();
-             switch(controlador.getTipoAlmacenamiento())
+            switch(controlador.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     buscarEstudianteEnArchivosPlanos();
@@ -60,19 +60,34 @@ public class Controlador_FRM_Matricula implements ActionListener
         
         if(e.getActionCommand().equalsIgnoreCase("ConsultarCurso"))
         {
-            buscarCurso();
+            switch(controlador.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    buscarCursoEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
+            
         }
         
         if(e.getActionCommand().equalsIgnoreCase("Agregar"))
         {
-            frm_Matricula.agregarMatricula();
-            inicial();
-            frm_Matricula.habililitarFinalizar();
+            agregarmatricula();
         }
+        
         if(e.getActionCommand().equalsIgnoreCase("Finalizar Matricula"))
         {
             finalizarMatricula();
         }
+        
         if(e.getActionCommand().equalsIgnoreCase("Modificar"))
         {                                                                     
             metodosMatriculas.modificarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada(),frm_Matricula.devolverSigla());
@@ -80,12 +95,14 @@ public class Controlador_FRM_Matricula implements ActionListener
             frm_Matricula.limpiadoInicial();
             frm_Matricula.colocarCodigo();
         }
+        
         if(e.getActionCommand().equalsIgnoreCase("Eliminar"))
         {
             metodosMatriculas.eliminarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada());
             frm_Matricula.borrarFila();
             frm_Matricula.desabilitarBotones();
         }
+        
         if(e.getActionCommand().equalsIgnoreCase("Consultar"))
         {
             frm_Matricula.resetearVentana();
@@ -106,7 +123,6 @@ public class Controlador_FRM_Matricula implements ActionListener
     {
         if(metodosEstudiantes.consultarEstudiante(frm_Matricula.devolverCedula()))
         {
-            System.out.println("Lo encontré");
             frm_Matricula.mostrarInformacionEstudiante(metodosEstudiantes.getArregloInformacion()[0]);
             verificarEstudiante=true;
             habilitarAgregar();
@@ -118,11 +134,10 @@ public class Controlador_FRM_Matricula implements ActionListener
         }
     }//fin del metodo buscar Estudiante
     
-    public void buscarCurso()
+    public void buscarCursoEnArchivosPlanos()
     {
         if(metodosCursos.consultarCurso(frm_Matricula.devolverSigla()))
         {
-            System.out.println("Lo encontré");
             frm_Matricula.mostrarInformacionCurso(metodosCursos.getArregloInformacion()[0]);
             verificarCurso=true;
             habilitarAgregar();
@@ -132,7 +147,8 @@ public class Controlador_FRM_Matricula implements ActionListener
             frm_Matricula.mostrarMensaje("La Sigla buscada no se encuentra.");
             frm_Matricula.resetearGUI();
         }
-    }
+    }//fin del metodo buscar curso en archivo Planos
+    
     public void habilitarAgregar()
     {
         if(verificarEstudiante && verificarCurso)
@@ -140,6 +156,15 @@ public class Controlador_FRM_Matricula implements ActionListener
             frm_Matricula.habilitarAgregar();
         }
     }
+    
+    public void agregarmatricula()
+    {
+        frm_Matricula.agregarMatricula();
+        inicial();
+        frm_Matricula.habililitarFinalizar();
+        
+    }//agrega la informacion a la tabla
+  
     
     public void finalizarMatricula()
     {
