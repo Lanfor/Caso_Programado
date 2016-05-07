@@ -7,6 +7,7 @@ package controlador;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 import modelo.MetodosCursos;
 import vista.FRM_MantenimientoCursos;
 
@@ -107,16 +108,31 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
     public void registrarEnArchivosPlanos()
     {
-           metodosCursos.agregarCursos(frm_MantenimientoCursos.devolverInformacion());
+        if(controlador.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
+        {
+            metodosCursos.agregarCursos(frm_MantenimientoCursos.devolverInformacion());
            frm_MantenimientoCursos.mostrarMensaje("El estudiante fue registrado de forma correcta");
-           frm_MantenimientoCursos.resetearGUI();
+           frm_MantenimientoCursos.resetearGUI(); 
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "El campo de sigla tiene que estar lleno");
+        }
+          
     }//fin del metodo agregar en Archivos Planos
     
      public void registarConBD()
     {
-        controlador.conexionBD.registrarCurso(frm_MantenimientoCursos.devolverInformacion());
-        frm_MantenimientoCursos.mostrarMensaje("Usuario registrado con exito");
-        frm_MantenimientoCursos.resetearGUI();   
+         if(controlador.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
+        {
+            controlador.conexionBD.registrarCurso(frm_MantenimientoCursos.devolverInformacion());
+            frm_MantenimientoCursos.mostrarMensaje("Usuario registrado con exito");
+            frm_MantenimientoCursos.resetearGUI();   
+        }
+         else
+         {
+            JOptionPane.showMessageDialog(null, "El campo de sigla tiene que estar lleno");
+         }
     }//fin del metodo agregar con BD
     
     public void buscarEnArchivosPlanos()

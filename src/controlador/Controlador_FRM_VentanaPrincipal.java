@@ -79,6 +79,7 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
         frm_MantenimientoEstudiantes.controlador_FRM_VentanaPrincipal=this;
         frm_Matricula.controlador_FRM_VentanaPrincipal=this;
         
+        
         metodos_XML_Usuarios=new Metodos_XML_Usuarios(frm_RegistroUsuarios);
         metodos_XML_Estudiantes=new Metodos_XML_Estudiantes(frm_MantenimientoEstudiantes);
         metodos_XML_Matricula=new Metodos_XML_Matricula(frm_Matricula);
