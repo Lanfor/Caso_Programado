@@ -177,11 +177,19 @@ public class ConexionBD {
         }
         
     }
-    public void consultarCurso(String sigla)
+    
+    String arregloCursos[] = new String[3];
+    
+    public String[] getArregloCursos()
+    {
+        return arregloCursos;
+    }
+    
+    public boolean consultarCurso(String sigla)
     {
         ResultSet rs = null;
         Statement cmd = null;
-
+        boolean existo = false;
         try {
                 cmd = con.createStatement();
                 rs = cmd.executeQuery("SELECT * FROM `cursos` WHERE sigla="+sigla);
@@ -189,10 +197,14 @@ public class ConexionBD {
                 while (rs.next()) 
                 {
                     
-                    String nombre = rs.getString("nombre");
+                    /*String nombre = rs.getString("nombre");
                     int creditos = rs.getInt("creditos");
-                    String horario = rs.getString("horario");
-                    System.out.println("Información de la BD:\n\nNombre: "+nombre+"\nSigla: "+sigla+"\nCreditos: "+creditos+"\nHorario: "+horario); 
+                    String horario = rs.getString("horario");*/
+                    arregloCursos[0] = rs.getString("nombre");
+                    arregloCursos[1] = Integer.toString(rs.getInt("creditos"));
+                    arregloCursos[2] = rs.getString("horario");
+                   // System.out.println("Información de la BD:\n\nNombre: "+nombre+"\nSigla: "+sigla+"\nCreditos: "+creditos+"\nHorario: "+horario); 
+                    existo = true;
                 }
                 rs.close();
         }
@@ -200,7 +212,9 @@ public class ConexionBD {
         {
             System.out.println("SQLException ejecutando sentencia: " + e.getMessage());
         }
+        return existo;
     }
+    
     public boolean modificarCurso(String[] arreglo)
     {
         ResultSet rs = null;
@@ -283,6 +297,10 @@ public class ConexionBD {
         }
         
     }
+    
+    
+    
+    
     public void consultarMatricula(String codigo)
     {
         ResultSet rs = null;

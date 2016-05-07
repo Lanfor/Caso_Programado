@@ -39,7 +39,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    
+                    registarConBD();
                 break;
                 default:
                     frm_MantenimientoCursos.mostrarMensaje("Error 407 ha fallado el sistema");
@@ -48,19 +48,59 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
         if(evento.getActionCommand().equals("Consultar") || evento.getActionCommand().equals("ConsultaRapida"))
         {
-            buscar();
+            switch(controlador.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    buscarEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    buscarEnBD();
+                break;
+                default:
+                    frm_MantenimientoCursos.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
         
         if(evento.getActionCommand().equals("Modificar"))
         {
-            metodosCursos.modificarEstudiante(frm_MantenimientoCursos.devolverInformacion());
-            frm_MantenimientoCursos.resetearGUI();
+            switch(controlador.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    modificarEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    modificarEnBD();
+                break;
+                default:
+                    frm_MantenimientoCursos.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
         
         if(evento.getActionCommand().equals("Eliminar"))
         {
-            metodosCursos.eliminarEstudiante();
-            frm_MantenimientoCursos.resetearGUI();
+            switch(controlador.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    eliminarEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    eliminarEnBD();
+                break;
+                default:
+                    frm_MantenimientoCursos.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
         
     }
@@ -79,7 +119,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         frm_MantenimientoCursos.resetearGUI();   
     }//fin del metodo agregar con BD
     
-    public void buscar()
+    public void buscarEnArchivosPlanos()
     {
         
         if(metodosCursos.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
@@ -95,7 +135,53 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                 else
                 frm_MantenimientoCursos.resetearGUI();
             }
+    }//fin del metodo buscar en archivos Planos
+    
+    public void buscarEnBD()
+    {
+        
+            if(controlador.conexionBD.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
+            {
+                frm_MantenimientoCursos.mostrarInformacion(controlador.conexionBD.getArregloEstudiantes());
+                frm_MantenimientoCursos.habilitarEdicion();
+            }
+            else
+            {
+                int valor=frm_MantenimientoCursos.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                System.out.println("Me devuelve "+ valor);
+                if(valor==0)
+                frm_MantenimientoCursos.habilitarAgregar();
+                else
+                frm_MantenimientoCursos.resetearGUI();
+            }
+        }//fin del metodo buscar en BD
+    
+    public void modificarEnArchivosPlanos()
+    {
+        metodosCursos.modificarEstudiante(frm_MantenimientoCursos.devolverInformacion());
+        frm_MantenimientoCursos.resetearGUI();
+    }//fin del metodo modificar en Archivos Planos
+    
+    public void modificarEnBD()
+    {
+            controlador.conexionBD.modificarEstudiante(frm_MantenimientoCursos.devolverInformacion());
+            frm_MantenimientoCursos.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoCursos.resetearGUI();
+    }//fin del metodo modificar en BD
+      
+    public void eliminarEnArchivosPlanos()
+    {
+        metodosCursos.eliminarEstudiante();
+        frm_MantenimientoCursos.resetearGUI();
+    }//fin del metodo eliminar en archivos planos
+    
+    public void eliminarEnBD()
+    {
+            controlador.conexionBD.eliminarEstudiante(frm_MantenimientoCursos.devolverInformacion());
+            frm_MantenimientoCursos.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoCursos.resetearGUI();
     }
+    
     
     
 }//fin de la clase Controlador_FRM_MantenimientoCursos
