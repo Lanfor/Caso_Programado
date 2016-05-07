@@ -36,7 +36,7 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
     FRM_MantenimientoEstudiantes frm_MantenimientoEstudiantes;
     FRM_MantenimientoCursos frm_MantenimientosCursos;
     FRM_Matricula frm_Matricula;
-    FRM_VentanaPrincipal frm_VentanaPrincipal;
+    public FRM_VentanaPrincipal frm_VentanaPrincipal;
     FRM_TipoAlmacenamiento frm_TipoAlmacenamiento;
     public FRM_RegistroUsuarios frm_RegistroUsuarios;
     public FRM_LogIn frm_LogIn;
@@ -74,6 +74,9 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
         frm_RegistroUsuarios.controlador_FRM_RegistroUsuarios.controlador_FRM_VentanaPrincipal=this;
         frm_RegistroUsuarios.controlador_FRM_RegistroUsuarios.conexionBD=this.conexionBD;
         frm_MantenimientoEstudiantes.controlador_FRM_MantenimientoEstudiantes.controlador_FRM_VentanaPrincipal=this;
+        frm_MantenimientosCursos.controlador_FRM_VentanaPrincipal=this;
+        frm_MantenimientoEstudiantes.controlador_FRM_VentanaPrincipal=this;
+        frm_Matricula.controlador_FRM_VentanaPrincipal=this;
         
         metodos_XML_Usuarios=new Metodos_XML_Usuarios(frm_RegistroUsuarios);
         metodos_XML_Estudiantes=new Metodos_XML_Estudiantes(frm_MantenimientoEstudiantes);

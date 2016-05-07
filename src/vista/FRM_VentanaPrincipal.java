@@ -11,7 +11,7 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
 
     
     
-    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
+    public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     
     public FRM_VentanaPrincipal() {
         initComponents();

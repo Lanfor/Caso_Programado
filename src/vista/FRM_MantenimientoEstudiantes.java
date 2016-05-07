@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.Controlador_FRM_MantenimientoEstudiantes;
+import controlador.Controlador_FRM_VentanaPrincipal;
 import javax.swing.JOptionPane;
 import modelo.MetodosEstudiantes;
 
@@ -18,6 +19,7 @@ public class FRM_MantenimientoEstudiantes extends javax.swing.JFrame {
    
     public Controlador_FRM_MantenimientoEstudiantes controlador_FRM_MantenimientoEstudiantes;
     MetodosEstudiantes metodosEstudiantes;
+    public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public FRM_MantenimientoEstudiantes(MetodosEstudiantes metodosEstudiantes) {
         initComponents();
         setVisible(false);
@@ -120,7 +122,8 @@ public class FRM_MantenimientoEstudiantes extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-       controlador_FRM_MantenimientoEstudiantes.metodosEstudiantes.escribirSobreArchivo();
+       if(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento().equalsIgnoreCase("Archivo Plano"))
+           controlador_FRM_MantenimientoEstudiantes.metodosEstudiantes.escribirSobreArchivo();
     }//GEN-LAST:event_formComponentHidden
 
     /**

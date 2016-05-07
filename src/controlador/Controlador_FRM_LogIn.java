@@ -7,7 +7,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.ConexionBD;
 import modelo.MetodosUsuarios;
+import modelo.Metodos_XML_Usuarios;
 import vista.FRM_LogIn;
 import vista.FRM_RegistroUsuarios;
 import vista.FRM_VentanaPrincipal;
@@ -35,7 +37,20 @@ public class Controlador_FRM_LogIn implements ActionListener
     {
         if(e.getActionCommand().equalsIgnoreCase("Aceptar"))
         {
-            verificarUsuario();
+            switch(frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    verificarUsuarioConArchivoPlano();
+                break;
+                case "Archivo XML":
+                    verificarConXML();
+                break;
+                case "Base de Datos":
+                    verificarConBD();
+                break;
+                default:
+                    frm_RegistroUsuarios.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
         if(e.getActionCommand().equalsIgnoreCase("Registrar Usuario"))
         {
@@ -46,45 +61,135 @@ public class Controlador_FRM_LogIn implements ActionListener
             frm_Ventana_LogIn.dispose();
         }
     }
-    
-    public void verificarUsuario()
+    public void verificarConBD()
     {
-        if(metodosUsuarios.consultarUsuario(frm_Ventana_LogIn.devolverUsuario()) && metodosUsuarios.getArregloInformacion()[1].equals(frm_Ventana_LogIn.devolverContraseña()))
+        ConexionBD conexionBD=frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.conexionBD;
+        if(frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverUsuario()) && frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverContraseña()))
         {
-            frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"*******"+metodosUsuarios.getArregloInformacion()[2]+" "+frm_Ventana_LogIn.devolverUsuario()+"*******");
-            if(metodosUsuarios.getArregloInformacion()[2].equalsIgnoreCase("Administrador"))
+            if(conexionBD.consultarUsuario(frm_Ventana_LogIn.devolverUsuario()) && conexionBD.getArregloUsuario()[1].equals(frm_Ventana_LogIn.devolverContraseña()))
             {
-                frm_Ventana_LogIn.soyAdministrador();
-                frm_Ventana_LogIn.habitarRegistro();
-            }
-            else 
-            {
-                if(metodosUsuarios.getArregloInformacion()[2].equalsIgnoreCase("Usuario"))
+                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"* + * + * + * + * + * + * + "+conexionBD.getArregloUsuario()[2]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
+                
+                switch(conexionBD.getArregloUsuario()[2])
                 {
-                    frm_Ventana_LogIn.soyUsuario();
-                    frm_Ventana_LogIn.desabitarRegistro();
+                    case "Administrador":
+                        frm_Ventana_LogIn.soyAdministrador();
+                        frm_Ventana_LogIn.habitarRegistro();
+                        break;
+                    case "Usuario":
+                        frm_Ventana_LogIn.soyUsuario();
+                        frm_Ventana_LogIn.desabitarRegistro();
+                        break;
+                    case "Desarrollador":
+                        frm_Ventana_LogIn.soyDesarrollador();
+                        frm_Ventana_LogIn.habitarRegistro();
+                    break;
+                }
+                frm_Ventana_LogIn.limpiar();
+                frm_Ventana_LogIn.dispose();
+                frm_VentanaPrincipal.show();
+            }
+            else
+            {
+                if(frm_Ventana_LogIn.mostrarMensajeOpcional("El usuario y/o contraseña es incorrecto , deseavolver a intentarlo?")==1)
+                {
+                    frm_Ventana_LogIn.limpiar();
+                    frm_Ventana_LogIn.dispose();
+                }
+            }
+        }
+        else
+            frm_Ventana_LogIn.mostrarMensaje("Debes digitar un nombre de usuario y una conotraseña para poder ingresar");
+    }
+    public void verificarConXML()
+    {
+        Metodos_XML_Usuarios metodos_XML_Usuarios=frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.metodos_XML_Usuarios;
+        //NO encuentra el usuario con XML
+        if(frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverUsuario()) && frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverContraseña()))
+        {
+            if(metodos_XML_Usuarios.consultarInformacionDelXml(frm_Ventana_LogIn.devolverUsuario()) && metodos_XML_Usuarios.getArregloInformacion()[3].equalsIgnoreCase(frm_Ventana_LogIn.devolverContraseña()))
+            {
+                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"* + * + * + * + * + * + * + "+metodos_XML_Usuarios.getArregloInformacion()[3]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
+                if(metodos_XML_Usuarios.getArregloInformacion()[3].equalsIgnoreCase("Administrador"))
+                {
+                    frm_Ventana_LogIn.soyAdministrador();
+                    frm_Ventana_LogIn.habitarRegistro();
                 }
                 else 
                 {
-                    if(metodosUsuarios.getArregloInformacion()[2].equalsIgnoreCase("Desarrollador"))
+                    if(metodos_XML_Usuarios.getArregloInformacion()[3].equalsIgnoreCase("Usuario"))
                     {
-                        frm_Ventana_LogIn.soyDesarrollador();
-                        frm_Ventana_LogIn.habitarRegistro();
-                    }   
+                        frm_Ventana_LogIn.soyUsuario();
+                        frm_Ventana_LogIn.desabitarRegistro();
+                    }
+                    else 
+                    {
+                        if(metodos_XML_Usuarios.getArregloInformacion()[3].equalsIgnoreCase("Desarrollador"))
+                        {
+                            frm_Ventana_LogIn.soyDesarrollador();
+                            frm_Ventana_LogIn.habitarRegistro();
+                        }   
+                    }
                 }
-            }
-            frm_Ventana_LogIn.limpiar();
-            frm_Ventana_LogIn.dispose();
-            frm_VentanaPrincipal.show();
-        }
-        else
-        {
-            if(frm_Ventana_LogIn.mostrarMensajeOpcional("El usuario y/o contraseña es incorrecto , deseavolver a intentarlo?")==1)
-            {
                 frm_Ventana_LogIn.limpiar();
                 frm_Ventana_LogIn.dispose();
+                frm_VentanaPrincipal.show();
+            }
+            else
+            {
+                if(frm_Ventana_LogIn.mostrarMensajeOpcional("El usuario y/o contraseña es incorrecto , deseavolver a intentarlo?")==1)
+                {
+                    frm_Ventana_LogIn.limpiar();
+                    frm_Ventana_LogIn.dispose();
+                }
             }
         }
+        else
+            frm_Ventana_LogIn.mostrarMensaje("Debes digitar un nombre de usuario y una conotraseña para poder ingresar");
+    }
+    public void verificarUsuarioConArchivoPlano()
+    {
+        if(frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverUsuario()) && frm_VentanaPrincipal.controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_Ventana_LogIn.devolverContraseña()))
+        {
+            if(metodosUsuarios.consultarUsuario(frm_Ventana_LogIn.devolverUsuario()) && metodosUsuarios.getArregloInformacion()[1].equals(frm_Ventana_LogIn.devolverContraseña()))
+            {
+                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"* + * + * + * + * + * + * + "+metodosUsuarios.getArregloInformacion()[2]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
+                if(metodosUsuarios.getArregloInformacion()[2].equalsIgnoreCase("Administrador"))
+                {
+                    frm_Ventana_LogIn.soyAdministrador();
+                    frm_Ventana_LogIn.habitarRegistro();
+                }
+                else 
+                {
+                    if(metodosUsuarios.getArregloInformacion()[2].equalsIgnoreCase("Usuario"))
+                    {
+                        frm_Ventana_LogIn.soyUsuario();
+                        frm_Ventana_LogIn.desabitarRegistro();
+                    }
+                    else 
+                    {
+                        if(metodosUsuarios.getArregloInformacion()[2].equalsIgnoreCase("Desarrollador"))
+                        {
+                            frm_Ventana_LogIn.soyDesarrollador();
+                            frm_Ventana_LogIn.habitarRegistro();
+                        }   
+                    }
+                }
+                frm_Ventana_LogIn.limpiar();
+                frm_Ventana_LogIn.dispose();
+                frm_VentanaPrincipal.show();
+            }
+            else
+            {
+                if(frm_Ventana_LogIn.mostrarMensajeOpcional("El usuario y/o contraseña es incorrecto , deseavolver a intentarlo?")==1)
+                {
+                    frm_Ventana_LogIn.limpiar();
+                    frm_Ventana_LogIn.dispose();
+                }
+            }
+        }
+        else
+            frm_Ventana_LogIn.mostrarMensaje("Debes digitar un nombre de usuario y una conotraseña para poder ingresar");
     }
  
     

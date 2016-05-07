@@ -1,6 +1,7 @@
 package vista;
 
 import controlador.Controlador_FRM_Matricula;
+import controlador.Controlador_FRM_VentanaPrincipal;
 import javax.swing.JOptionPane;
 import modelo.MetodosCursos;
 import modelo.MetodosEstudiantes;
@@ -18,6 +19,7 @@ public class FRM_Matricula extends javax.swing.JFrame {
     
     Controlador_FRM_Matricula controlador;
     MetodosMatriculas metodosMatricula;
+    public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public FRM_Matricula(MetodosEstudiantes metodosEstudiantes, MetodosCursos metodosCursos) 
     {
         initComponents();
@@ -135,7 +137,7 @@ public class FRM_Matricula extends javax.swing.JFrame {
     
     public void borrarFila()
     {
-        this.panel_InformacionMatricula1.borrarFila();;
+        this.panel_InformacionMatricula1.borrarFila();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -194,7 +196,8 @@ public class FRM_Matricula extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-       this.metodosMatricula.escribirSobreArchivo();
+       if(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento().equalsIgnoreCase("Archivo Plano"))
+            this.metodosMatricula.escribirSobreArchivo();
     }//GEN-LAST:event_formComponentHidden
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

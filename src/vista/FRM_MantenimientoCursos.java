@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.Controlador_FRM_MantenimientoCursos;
+import controlador.Controlador_FRM_VentanaPrincipal;
 import javax.swing.JOptionPane;
 import modelo.MetodosCursos;
 
@@ -19,7 +20,8 @@ public class FRM_MantenimientoCursos extends javax.swing.JFrame {
      * Creates new form FRM_MantenimientoCursos
      */
     Controlador_FRM_MantenimientoCursos controlador;
-   MetodosCursos metodosCursos;
+    MetodosCursos metodosCursos;
+    public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public FRM_MantenimientoCursos(MetodosCursos metodosCursos) 
     {
         initComponents();
@@ -122,7 +124,8 @@ public class FRM_MantenimientoCursos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        this.metodosCursos.escribirSobreArchivo();
+        if(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento().equalsIgnoreCase("Archivo Plano"))
+            this.metodosCursos.escribirSobreArchivo();
     }//GEN-LAST:event_formComponentHidden
 
     /**

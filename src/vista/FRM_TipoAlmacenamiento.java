@@ -65,8 +65,12 @@ public class FRM_TipoAlmacenamiento extends javax.swing.JFrame {
         btn_Cancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 255));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         btng_TipoAlmacenamiento.add(jrb_ArchivoPlano);
@@ -76,7 +80,7 @@ public class FRM_TipoAlmacenamiento extends javax.swing.JFrame {
         jrb_ArchivoPlano.setText("Archivos Planos");
         jrb_ArchivoPlano.setBorderPainted(true);
         getContentPane().add(jrb_ArchivoPlano);
-        jrb_ArchivoPlano.setBounds(210, 100, 130, 23);
+        jrb_ArchivoPlano.setBounds(210, 100, 130, 28);
 
         btng_TipoAlmacenamiento.add(jrb_ArchivoXML);
         jrb_ArchivoXML.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -84,7 +88,7 @@ public class FRM_TipoAlmacenamiento extends javax.swing.JFrame {
         jrb_ArchivoXML.setText("Archivos XML");
         jrb_ArchivoXML.setBorderPainted(true);
         getContentPane().add(jrb_ArchivoXML);
-        jrb_ArchivoXML.setBounds(350, 100, 110, 23);
+        jrb_ArchivoXML.setBounds(350, 100, 110, 28);
 
         btng_TipoAlmacenamiento.add(jrb_BD);
         jrb_BD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -92,7 +96,7 @@ public class FRM_TipoAlmacenamiento extends javax.swing.JFrame {
         jrb_BD.setText("Base de datos");
         jrb_BD.setBorderPainted(true);
         getContentPane().add(jrb_BD);
-        jrb_BD.setBounds(470, 100, 120, 23);
+        jrb_BD.setBounds(470, 100, 120, 28);
 
         jl_Ask.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jl_Ask.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,10 +123,15 @@ public class FRM_TipoAlmacenamiento extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/benderBinario.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 650, 220);
+        jLabel2.setBounds(0, 0, 640, 210);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        if(!controlador_FRM_TipoAlmacenamiento.controlador_FRM_VentanaPrincipal.frm_VentanaPrincipal.isVisible())
+            System.exit(0);
+    }//GEN-LAST:event_formComponentHidden
 
     
 

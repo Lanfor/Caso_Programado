@@ -16,7 +16,7 @@ import vista.FRM_TipoAlmacenamiento;
 public class Controlador_FRM_TipoAlmacenamiento implements ActionListener
 {
     FRM_TipoAlmacenamiento frm_TipoAlmacenamiento;
-    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
+    public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public Controlador_FRM_TipoAlmacenamiento(FRM_TipoAlmacenamiento frm_TipoAlmacenamiento,Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal) 
     {
         this.frm_TipoAlmacenamiento=frm_TipoAlmacenamiento;

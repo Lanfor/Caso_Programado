@@ -53,6 +53,6 @@ public class Verificar
     }
     public boolean verificarVacio(String texto)
     {
-        return texto=="";
+        return !texto.equalsIgnoreCase("");
     }
 }

@@ -66,7 +66,7 @@ public class Metodos_XML_Usuarios
             ventana.mostrarMensaje("No existía un archivo XML creado, ya fue creado y puede proceder a utilizarlo");
         }
         
-        arregloInformacion=new String[3];
+        arregloInformacion=new String[4];
         titulos = new ArrayList();
         valores = new ArrayList();
     }
@@ -128,7 +128,7 @@ public class Metodos_XML_Usuarios
             Element valor3 = document.createElement("contrasena");
             Text text3 = document.createTextNode(arregloInformacion[2]);
             Element valor4=document.createElement("tipo");
-            Text text4=document.createTextNode(this.arregloInformacion[3]);
+            Text text4=document.createTextNode(arregloInformacion[3]);
             
             raiz.appendChild(valor1);
             valor1.appendChild(text);
@@ -176,7 +176,7 @@ public class Metodos_XML_Usuarios
     public boolean consultarInformacionDelXml(String nombreUsuario)
     { 
          Element raiz = document.getDocumentElement();
-         NodeList listaDeItems = raiz.getElementsByTagName("Estudiante");
+         NodeList listaDeItems = raiz.getElementsByTagName("Usuario");
          Node tag=null,datoContenido=null;
 
          boolean itemEncontrado=false,tituloCedula=false;
@@ -195,7 +195,7 @@ public class Metodos_XML_Usuarios
                  {
                     itemEncontrado=true;     
                  }
-                 if(itemEncontrado && contador<3)
+                 if(itemEncontrado && contador<4)
                  {
                     arregloInformacion[contador]=datoContenido.getNodeValue();
                     contador++;
@@ -212,7 +212,7 @@ public class Metodos_XML_Usuarios
     public void modificarInformacionDelXml(String informacion[])
     { 
          Element raiz = document.getDocumentElement();
-         NodeList listaDeItems = raiz.getElementsByTagName("Estudiante");
+         NodeList listaDeItems = raiz.getElementsByTagName("Usuario");
          Node tag=null,datoContenido=null;
          String arregloInformacion[]=new String[3];
          boolean itemEncontrado=false,tituloCedula=false;
