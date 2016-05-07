@@ -18,7 +18,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
 {
     FRM_MantenimientoCursos frm_MantenimientoCursos;
     MetodosCursos metodosCursos;
-    
+    public Controlador_FRM_VentanaPrincipal controlador;
     public Controlador_FRM_MantenimientoCursos(FRM_MantenimientoCursos frm_MantenimientoCursos, MetodosCursos metodosCursos)
     {
         this.frm_MantenimientoCursos = frm_MantenimientoCursos;
@@ -29,7 +29,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     {
         if(evento.getActionCommand().equals("Agregar"))
         {
-            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            switch(controlador.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     registrarEnArchivosPlanos();
@@ -74,7 +74,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
      public void registarConBD()
     {
-        controlador_FRM_VentanaPrincipal.conexionBD.registrarCursos(frm_MantenimientoCursos.devolverInformacion());
+        controlador.conexionBD.registrarCurso(frm_MantenimientoCursos.devolverInformacion());
         frm_MantenimientoCursos.mostrarMensaje("Usuario registrado con exito");
         frm_MantenimientoCursos.resetearGUI();   
     }//fin del metodo agregar con BD

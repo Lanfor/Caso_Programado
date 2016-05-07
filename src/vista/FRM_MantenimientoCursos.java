@@ -19,7 +19,7 @@ public class FRM_MantenimientoCursos extends javax.swing.JFrame {
     /**
      * Creates new form FRM_MantenimientoCursos
      */
-    Controlador_FRM_MantenimientoCursos controlador;
+    public Controlador_FRM_MantenimientoCursos controlador;
     MetodosCursos metodosCursos;
     public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public FRM_MantenimientoCursos(MetodosCursos metodosCursos) 

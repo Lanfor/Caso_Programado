@@ -73,8 +73,9 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
         
         frm_RegistroUsuarios.controlador_FRM_RegistroUsuarios.controlador_FRM_VentanaPrincipal=this;
         frm_RegistroUsuarios.controlador_FRM_RegistroUsuarios.conexionBD=this.conexionBD;
-        frm_MantenimientoEstudiantes.controlador_FRM_MantenimientoEstudiantes.controlador_FRM_VentanaPrincipal=this;
+        frm_MantenimientosCursos.controlador.controlador=this;
         frm_MantenimientosCursos.controlador_FRM_VentanaPrincipal=this;
+        frm_MantenimientoEstudiantes.controlador_FRM_MantenimientoEstudiantes.controlador_FRM_VentanaPrincipal=this;
         frm_MantenimientoEstudiantes.controlador_FRM_VentanaPrincipal=this;
         frm_Matricula.controlador_FRM_VentanaPrincipal=this;
         
