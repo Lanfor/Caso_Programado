@@ -51,6 +51,20 @@ public class Verificar
         }
         return esLetra;
     }
+    
+    public boolean verificarLetrasYEspacios(String texto)
+    {
+        boolean esLetra = true;
+        for (int i = 0; i < texto.length(); i++)
+        {
+            if(!Character.isLetter(texto.charAt(i)) && !texto.contains(" "))
+            {
+                esLetra = false;
+            }
+        }
+        return esLetra;
+    }
+    
     public boolean verificarVacio(String texto)
     {
         return !texto.equalsIgnoreCase("");//si el texto esta vacio devuelve falso
