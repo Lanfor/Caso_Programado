@@ -39,7 +39,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    registrarConArhivosXML();
                 break;
                 case "Base de Datos":
                     registarConBD();
@@ -58,7 +58,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 break;
 
                 case "Archivo XML":
-                    //Falta XML
+                    buscarEnArchivosXML();
                 break;
                 case "Base de Datos":
                       buscarEnBD();
@@ -77,7 +77,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 break;
 
                 case "Archivo XML":
-                    //Falta XML
+                    modificarEnArchivosXML();
                 break;
                 case "Base de Datos":
                      modificarEnBD();
@@ -96,7 +96,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 break;
 
                 case "Archivo XML":
-                    //Falta XML
+                    eliminarEnArhivosXML();
                 break;
                 case "Base de Datos":
                      eliminarEnBD();
@@ -278,6 +278,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
     }//fin del metodo agregar con BD
     
     //************************************* METODOS DE MODIFICAR **************************************
+    
     public void modificarArchivosPlanos()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
@@ -338,6 +339,20 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
         }
     }//fin del metodo eliminar en Archivos Planos
+    
+    public void eliminarEnArhivosXML()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.eliminarInformacionDelXml(frm_MantenimientoEstudiantes.devolverCedula());
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue eliminado de forma correcta.");
+            frm_MantenimientoEstudiantes.resetearGUI();
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+        }
+    }
     
     public void eliminarEnBD()
     {
