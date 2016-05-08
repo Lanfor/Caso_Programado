@@ -17,21 +17,16 @@ public class FRM_Matricula extends javax.swing.JFrame {
      * Creates new form FRM_Matricula
      */
     
-    Controlador_FRM_Matricula controlador;
+    public Controlador_FRM_Matricula controlador;
     MetodosMatriculas metodosMatricula;
-    public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
-    public FRM_Matricula(MetodosEstudiantes metodosEstudiantes, MetodosCursos metodosCursos) 
+    //public Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
+    public FRM_Matricula(MetodosEstudiantes metodosEstudiantes, MetodosCursos metodosCursos,Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal) 
     {
         initComponents();
         this.setLocation(350, 50);
-        controlador=new Controlador_FRM_Matricula(this, metodosEstudiantes, metodosCursos);
+        controlador=new Controlador_FRM_Matricula(this, metodosEstudiantes, metodosCursos,controlador_FRM_VentanaPrincipal);
         this.metodosMatricula = controlador.metodosMatriculas;
-        colocarCodigo();
         agregarEventos();
-    }
-    public void enviarControlPrincipal()
-    {
-        this.panel_InformacionMatricula1.recibirControlPrincipal(controlador_FRM_VentanaPrincipal);
     }
     public  void agregarEventos()
     {
@@ -128,7 +123,23 @@ public class FRM_Matricula extends javax.swing.JFrame {
     }
     public void colocarCodigo()
     {
-        this.panel_InformacionMatricula1.colocarCodigo(metodosMatricula.devolverCodigo());
+        switch(controlador.controlador_Principal.getTipoAlmacenamiento())
+        {
+             
+            case "Archivo Plano":
+            this.panel_InformacionMatricula1.colocarCodigo(metodosMatricula.devolverCodigo());
+            break;
+            case "Archivo XML":
+            //Falta XML
+            break;
+            case "Base de Datos":
+                  
+            break;
+            default:
+            mostrarMensaje("Error 407 ha fallado el sistema");
+            
+        }
+        
     }
     public String[] devolverInformacion()
     {
@@ -157,6 +168,9 @@ public class FRM_Matricula extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -169,13 +183,15 @@ public class FRM_Matricula extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_InformacionMatricula1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(panel_Botones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_Finalizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_InformacionMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel_Botones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Finalizar)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,9 +216,13 @@ public class FRM_Matricula extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-       if(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento().equalsIgnoreCase("Archivo Plano"))
+       if(controlador.controlador_Principal.getTipoAlmacenamiento().equalsIgnoreCase("Archivo Plano"))
             this.metodosMatricula.escribirSobreArchivo();
     }//GEN-LAST:event_formComponentHidden
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        colocarCodigo();
+    }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Finalizar;

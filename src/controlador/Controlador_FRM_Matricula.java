@@ -24,15 +24,15 @@ public class Controlador_FRM_Matricula implements ActionListener
     public MetodosCursos metodosCursos;
     public MetodosMatriculas metodosMatriculas;
     boolean verificarEstudiante=false, verificarCurso=false;
-    public Controlador_FRM_VentanaPrincipal controlador;
+    public Controlador_FRM_VentanaPrincipal controlador_Principal;
     
-    public Controlador_FRM_Matricula(FRM_Matricula fRM_Matricula, MetodosEstudiantes metodosEstudiantes, MetodosCursos metodosCursos) 
+    public Controlador_FRM_Matricula(FRM_Matricula fRM_Matricula, MetodosEstudiantes metodosEstudiantes, MetodosCursos metodosCursos,Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal) 
     {
         this.frm_Matricula = fRM_Matricula;
         this.metodosEstudiantes=metodosEstudiantes;
         this.metodosCursos=metodosCursos;
         this.metodosMatriculas=new MetodosMatriculas(this, this.metodosCursos,this.metodosEstudiantes);
-        controlador = frm_Matricula.controlador_FRM_VentanaPrincipal;
+        this.controlador_Principal=controlador_FRM_VentanaPrincipal;
     }
 
     @Override
@@ -40,8 +40,7 @@ public class Controlador_FRM_Matricula implements ActionListener
     {
         if(e.getActionCommand().equalsIgnoreCase("ConsultarEstudiante"))
         {
-            frm_Matricula.enviarControlPrincipal();
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     buscarEstudianteEnArchivosPlanos();
@@ -57,10 +56,10 @@ public class Controlador_FRM_Matricula implements ActionListener
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
             }
         }
-        
+//***************************************************************************************************************//
         if(e.getActionCommand().equalsIgnoreCase("ConsultarCurso"))
         {
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     buscarCursoEnArchivosPlanos();
@@ -77,20 +76,35 @@ public class Controlador_FRM_Matricula implements ActionListener
             }
             
         }
-        
+//*************************************************************************************************************************//
         if(e.getActionCommand().equalsIgnoreCase("Agregar"))
         {
-            agregarmatricula();
+             agregarmatricula();
+            
         }
-        
+//***************************************************************************************************************************//
         if(e.getActionCommand().equalsIgnoreCase("Finalizar Matricula"))
         {
-            finalizarMatricula();
+            switch(controlador_Principal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                   finalizarMatriculaEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
-        
+//******************************************************************************************************************************//
         if(e.getActionCommand().equalsIgnoreCase("Modificar"))
         {      
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     modificarEnArchivosPlanos();
@@ -106,10 +120,10 @@ public class Controlador_FRM_Matricula implements ActionListener
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
             }
         }
-        
+//**********************************************************************************************************************************//
         if(e.getActionCommand().equalsIgnoreCase("Eliminar"))
         {
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     eliminarEnArchivosPlanos();
@@ -204,7 +218,7 @@ public class Controlador_FRM_Matricula implements ActionListener
     }//agrega la informacion a la tabla
   
     
-    public void finalizarMatricula()
+    public void finalizarMatriculaEnArchivosPlanos()
     {
             String arreglo[] = new String [3];
             for (int contador = 0; contador < frm_Matricula.getCantidadFilas(); contador++) 

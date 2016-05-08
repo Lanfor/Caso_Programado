@@ -161,9 +161,9 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
         {
-                if(controlador_FRM_VentanaPrincipal.vericar.verificarLetras(frm_MantenimientoEstudiantes.devolverInformacion()[1]))
+                if(controlador_FRM_VentanaPrincipal.vericar.verificarLetrasYEspacios(frm_MantenimientoEstudiantes.devolverInformacion()[1]))
                 {
-                    if(!controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
+                    if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
                     {
                             metodosEstudiantes.agregarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
                             frm_MantenimientoEstudiantes.mostrarMensaje("Usuario registrado con exito");
@@ -177,7 +177,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                 }
                 else
                 {
-                    frm_MantenimientoEstudiantes.mostrarMensaje("El nombre de usuario debe contener solo letras"); 
+                    frm_MantenimientoEstudiantes.mostrarMensaje("El nombre debe contener solo letras"); 
                 }         
         }
         else

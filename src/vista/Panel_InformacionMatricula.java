@@ -20,7 +20,6 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     Controlador_FRM_Matricula controlador;
-    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public Panel_InformacionMatricula() {
         initComponents();
         modelo=new DefaultTableModel();
@@ -130,10 +129,6 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
     public void borrarFila()
     {
         modelo.removeRow(tbl_Tabla.getSelectedRow());
-    }
-    public void recibirControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
-    {
-        this.controlador_FRM_VentanaPrincipal=controlador_FRM_VentanaPrincipal;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -297,7 +292,7 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
     private void jt_CedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_CedulaKeyPressed
         if(evt.getKeyCode()==10)
         {
-            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            switch(controlador.controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     controlador.buscarEstudianteEnArchivosPlanos();
@@ -318,7 +313,7 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
     private void jt_SiglaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_SiglaKeyPressed
         if(evt.getKeyCode()==10)
         {
-            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            switch(controlador.controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     controlador.buscarCursoEnArchivosPlanos();
@@ -341,7 +336,7 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
         jt_Cedula.setText(""+modelo.getValueAt(tbl_Tabla.getSelectedRow(), 1));
         jt_NombEstudiante.setText(""+modelo.getValueAt(tbl_Tabla.getSelectedRow(), 2));
         jt_Sigla.setText(""+modelo.getValueAt(tbl_Tabla.getSelectedRow(), 3));
-        switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+        switch(controlador.controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     controlador.buscarCursoEnArchivosPlanos();
