@@ -105,7 +105,12 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                     frm_MantenimientoEstudiantes.mostrarMensaje("Error 407 ha fallado el sistema");
             }
         }//fin del action command Eliminar
-    }//fin del 
+    }//fin del
+    
+//******************************************INICIO DE LOS METODOS**********************************
+    
+    
+    //**********************************************METODOS DE BUSCAR***************************
     public void buscarArchivosPlanos()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
@@ -129,6 +134,32 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener numeros");
         }
     }//fin del metodo buscar en archivos planos 
+    
+    
+    public void buscarEnArchivosXML()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            if(controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.consultarInformacionDelXml(frm_MantenimientoEstudiantes.devolverCedula()))
+            {
+                frm_MantenimientoEstudiantes.mostrarInformacion(metodosEstudiantes.getArregloInformacion());
+                frm_MantenimientoEstudiantes.habilitarEdicion();
+            }
+            else
+            {
+                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                if(valor==0)
+                frm_MantenimientoEstudiantes.habilitarAgregar();
+                else
+                frm_MantenimientoEstudiantes.resetearGUI();
+            }
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener numeros");
+        }
+    }//fin del metodo buscar en archivos XML
+    
     
     public void buscarEnBD()
     {
@@ -155,6 +186,9 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         }
     } //fin del metodo buscar en BD
     
+    
+    
+    //********************************************METODOS DE REGISTRAR*******************************
     public void registarConArchivosPlanos()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
@@ -183,6 +217,36 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             frm_MantenimientoEstudiantes.mostrarMensaje("La cedula solo puede contener numeros"); 
         }
     }//fin del metodo agregar con archivos planos
+    
+    public void registrarConArhivosXML()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+                if(controlador_FRM_VentanaPrincipal.vericar.verificarLetrasYEspacios(frm_MantenimientoEstudiantes.devolverInformacion()[1]))
+                {
+                    if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
+                    {
+                            controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.guardarEnXML(frm_MantenimientoEstudiantes.devolverInformacion());
+                            frm_MantenimientoEstudiantes.mostrarMensaje("Estudiante registrado con exito, en archivos planos");
+                            frm_MantenimientoEstudiantes.resetearGUI();   
+                    }
+                    else
+                    {
+                        
+                        frm_MantenimientoEstudiantes.mostrarMensaje("Debe digitar una direccion");
+                    }
+                }
+                else
+                {
+                    frm_MantenimientoEstudiantes.mostrarMensaje("El nombre debe contener solo letras"); 
+                }         
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula solo puede contener numeros"); 
+        }
+    }//fin del metodo registrar con arhivos XML
+    
     
     public void registarConBD()
     {
@@ -213,7 +277,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         }
     }//fin del metodo agregar con BD
     
-    
+    //************************************* METODOS DE MODIFICAR **************************************
     public void modificarArchivosPlanos()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
@@ -229,6 +293,22 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                
     }//fin del metodo modificar en archivos planos
     
+    
+    public void modificarEnArchivosXML()
+    {
+        if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
+        {
+            controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.modificarInformacionDelXml(frm_MantenimientoEstudiantes.devolverInformacion());
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta, en los Arhivos Planos.");
+            frm_MantenimientoEstudiantes.resetearGUI();
+        }
+        else
+        {
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+        }
+    }
+    
+    
     public void modificarEnBD()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
@@ -243,6 +323,8 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         }
     }//fin del metodo modificar en BD
     
+    
+    //************************************** METODOS DE ELIMINAR *********************************
     public void eliminarEnArchivosPlanos()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))

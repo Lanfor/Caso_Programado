@@ -11,6 +11,7 @@ import modelo.ConexionBD;
 import modelo.MetodosCursos;
 import modelo.MetodosEstudiantes;
 import modelo.MetodosUsuarios;
+import modelo.Metodos_XML_Cursos;
 import modelo.Metodos_XML_Estudiantes;
 import modelo.Metodos_XML_Matricula;
 import modelo.Metodos_XML_Usuarios;
@@ -50,6 +51,7 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
 //******************* A R C H I V O S - X M L *******************************//
     Metodos_XML_Usuarios metodos_XML_Usuarios;
     Metodos_XML_Estudiantes metodos_XML_Estudiantes;
+    Metodos_XML_Cursos metodos_XML_Cursos;
     Metodos_XML_Matricula metodos_XML_Matricula;
     String TipoAlmacenamiento="";
     
@@ -82,6 +84,7 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
         
         metodos_XML_Usuarios=new Metodos_XML_Usuarios(frm_RegistroUsuarios);
         metodos_XML_Estudiantes=new Metodos_XML_Estudiantes(frm_MantenimientoEstudiantes);
+        metodos_XML_Cursos = new Metodos_XML_Cursos(frm_MantenimientosCursos);
         metodos_XML_Matricula=new Metodos_XML_Matricula(frm_Matricula);
     }
 
