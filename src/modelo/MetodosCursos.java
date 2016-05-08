@@ -81,7 +81,6 @@ public class MetodosCursos
     
     public void eliminarEstudiante()
     {
-        
                 arrayCursos.remove(pos);
             
     }
