@@ -12,6 +12,9 @@ import modelo.ConexionBD;
 import modelo.MetodosCursos;
 import modelo.MetodosEstudiantes;
 import modelo.MetodosMatriculas;
+import modelo.Metodos_XML_Cursos;
+import modelo.Metodos_XML_Estudiantes;
+import modelo.Metodos_XML_Matricula;
 import vista.FRM_Matricula;
 
 /**
@@ -318,7 +321,8 @@ public class Controlador_FRM_Matricula implements ActionListener
                 arreglo[1]=frm_Matricula.devolverDato(contador,1);
                 arreglo[2]=frm_Matricula.devolverDato(contador, 2);
                 arreglo[3]=frm_Matricula.devolverDato(contador,3);
-                conexionBD.registrarMatricula(arreglo);
+                if(!conexionBD.consultarMatricula(arreglo[0],arreglo[3]))
+                    conexionBD.registrarMatricula(arreglo);
             }
             frm_Matricula.desabililitarFinalizar();
             frm_Matricula.resetearVentana();
@@ -327,9 +331,85 @@ public class Controlador_FRM_Matricula implements ActionListener
             frm_Matricula.colocarCodigo();
     }
     
-    
-    
-    
     //***************************************METODOS ARCHIVOS XML************************************
     
+    public void buscarEstudianteEnXML()
+    {
+        Metodos_XML_Estudiantes metodos_XML_Estudiantes=controlador_Principal.metodos_XML_Estudiantes;
+        if(controlador_Principal.vericar.verificarVacio(frm_Matricula.devolverCedula()) && controlador_Principal.vericar.verificarNumero(frm_Matricula.devolverCedula()))
+        {
+            if(metodos_XML_Estudiantes.consultarInformacionDelXml(frm_Matricula.devolverCedula()))
+            {
+                frm_Matricula.mostrarInformacionEstudiante(metodos_XML_Estudiantes.getArregloInformacion()[1]);
+                verificarEstudiante=true;
+                habilitarAgregar();
+            }
+            else
+            {
+                frm_Matricula.mostrarMensaje("La cédula buscada no se encuentra en Archivos XML");
+                frm_Matricula.resetearGUI();
+            }
+        }
+        else
+        frm_Matricula.mostrarMensaje("Debe digitar un número de cédula que contenga solo numeros");
+    }//fin del metodo buscar Estudiante
+    
+    public void buscarCursoEnXML()
+    {
+        Metodos_XML_Cursos metodos_XML_Cursos=controlador_Principal.metodos_XML_Cursos;
+        
+        if(controlador_Principal.vericar.verificarVacio(frm_Matricula.devolverSigla()))
+        {
+            if(metodos_XML_Cursos.consultarInformacionDelXml(frm_Matricula.devolverSigla()))
+            {
+                frm_Matricula.mostrarInformacionCurso(metodos_XML_Cursos.getArregloInformacion()[1]);
+                verificarCurso=true;
+                habilitarAgregar();
+            }
+            else
+            {
+                frm_Matricula.mostrarMensaje("La sigla buscada no se encuentra en la Base de Datos");
+                frm_Matricula.resetearGUI();
+            }
+        }
+        else
+        frm_Matricula.mostrarMensaje("Debe digitar una sigla para buscar en la Base de Datos");
+    }//fin del metodo buscar Curso
+    
+    public void modificarEnXML()
+    {
+        Metodos_XML_Matricula metodos_XML_Matricula=controlador_Principal.metodos_XML_Matricula;
+        metodos_XML_Matricula.modificarInformacionDelXml(frm_Matricula.devolverInformacion());
+        frm_Matricula.desabilitarBotones();
+        frm_Matricula.limpiadoInicial();
+        frm_Matricula.colocarCodigo();
+    }//fin del metodo modificar en archivos planos
+    
+    public void eliminarEnXML()
+    {
+        Metodos_XML_Matricula metodos_XML_Matricula=controlador_Principal.metodos_XML_Matricula;
+        metodos_XML_Matricula.eliminarInformacionDelXml(frm_Matricula.devolverCodigo());
+        frm_Matricula.borrarFila();
+        frm_Matricula.desabilitarBotones();
+    }//metodo de eliminar en archivos planos
+    
+    public void finalizarMatriculaEnXML()
+    {
+        Metodos_XML_Matricula metodos_XML_Matricula=controlador_Principal.metodos_XML_Matricula;
+        String arreglo[] = new String [4];
+            for (int contador = 0; contador < frm_Matricula.getCantidadFilas(); contador++) 
+            {
+                arreglo[0]=frm_Matricula.devolverCodigo();
+                arreglo[1]=frm_Matricula.devolverDato(contador,1);
+                arreglo[2]=frm_Matricula.devolverDato(contador, 2);
+                arreglo[3]=frm_Matricula.devolverDato(contador,3);
+                if(!metodos_XML_Matricula.consultarInformacionDelXml(arreglo[0],  arreglo[3]))
+                    metodos_XML_Matricula.guardarEnXML(arreglo);
+            }
+            frm_Matricula.desabililitarFinalizar();
+            frm_Matricula.resetearVentana();
+            verificarEstudiante=false;
+            frm_Matricula.limpiadoInicial();
+            frm_Matricula.colocarCodigo();
+    }
 }//FIN DE LA CLASE CONTROLADOR_FRM_MATRICULA
