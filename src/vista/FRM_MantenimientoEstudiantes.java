@@ -29,6 +29,10 @@ public class FRM_MantenimientoEstudiantes extends javax.swing.JFrame {
         this.panel_Botones1.agregarEventos(controlador_FRM_MantenimientoEstudiantes);
         this.panel_InformacionBasica1.agregarEventos(controlador_FRM_MantenimientoEstudiantes);
     }
+    public void enviarControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
+    {
+        this.panel_InformacionBasica1.recibirControlPrincipal(controlador_FRM_VentanaPrincipal);
+    }
     public String[] devolverInformacion()
     {
         return this.panel_InformacionBasica1.devolverInformacion();

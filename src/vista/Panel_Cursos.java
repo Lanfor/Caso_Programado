@@ -83,10 +83,7 @@ public class Panel_Cursos extends javax.swing.JPanel
         
         return informacion;
     }
-    public void recibirControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
-    {
-        this.controlador_FRM_VentanaPrincipal=controlador_FRM_VentanaPrincipal;
-    }
+    
     public void deshabilitarCampos()
     {
         this.jt_Siglas.setEnabled(true);
@@ -101,7 +98,10 @@ public class Panel_Cursos extends javax.swing.JPanel
         this.jt_Horario.setText("");
         
     } 
-    
+    public void recibirControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
+    {
+        this.controlador_FRM_VentanaPrincipal=controlador_FRM_VentanaPrincipal;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

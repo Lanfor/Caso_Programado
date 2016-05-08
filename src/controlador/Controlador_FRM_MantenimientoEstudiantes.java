@@ -50,7 +50,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         }//fin del action command agregar
         
         if(e.getActionCommand().equals("Consultar") || e.getActionCommand().equals("Consulta_Rapida"))
-        {      
+        {      frm_MantenimientoEstudiantes.enviarControlPrincipal(this.controlador_FRM_VentanaPrincipal);
             switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
