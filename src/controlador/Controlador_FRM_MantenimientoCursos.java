@@ -37,7 +37,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    registrarEnArchivosXML();
                 break;
                 case "Base de Datos":
                     registarConBD();
@@ -56,7 +56,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    buscarEnArchivosXML();
                 break;
                 case "Base de Datos":
                     buscarEnBD();
@@ -75,7 +75,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    modificarEnArhivosXML();
                 break;
                 case "Base de Datos":
                     modificarEnBD();
@@ -94,7 +94,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    eliminarEnArchivosXML();
                 break;
                 case "Base de Datos":
                     eliminarEnBD();
@@ -106,6 +106,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
     }
     
+    //***************************************** Metodos ***************************************
     public void registrarEnArchivosPlanos()
     {
         if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
@@ -121,6 +122,20 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
           
     }//fin del metodo agregar en Archivos Planos
     
+    public void registrarEnArchivosXML()
+    {
+        if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
+        {
+           controlador_Principal.metodos_XML_Cursos.guardarEnXML(frm_MantenimientoCursos.devolverInformacion());
+           frm_MantenimientoCursos.mostrarMensaje("El Curso fue registrado de forma correcta, en archivos Planos");
+           frm_MantenimientoCursos.resetearGUI(); 
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "El campo de sigla tiene que estar lleno");
+        }
+    }
+    
      public void registarConBD()
     {
          if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
@@ -135,6 +150,9 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
          }
     }//fin del metodo agregar con BD
     
+     
+     
+     //**************************************** Metodos de Buscar ***********************************
     public void buscarEnArchivosPlanos()
     {
         
@@ -152,6 +170,23 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
                 frm_MantenimientoCursos.resetearGUI();
             }
     }//fin del metodo buscar en archivos Planos
+    
+    public void buscarEnArchivosXML()
+    {
+        if(controlador_Principal.metodosCursos.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
+            {
+                frm_MantenimientoCursos.mostrarInformacion(metodosCursos.getArregloInformacion());
+                frm_MantenimientoCursos.habilitarEdicion();
+            }
+            else
+            {
+                int valor=frm_MantenimientoCursos.mostrarMensajeVerificacion("La Sigla buscada no se encuentra, Desea agregarlo?.");
+                if(valor==0)
+                frm_MantenimientoCursos.habilitarAgregar();
+                else
+                frm_MantenimientoCursos.resetearGUI();
+            }
+    }
     
     public void buscarEnBD()
     {
@@ -171,12 +206,23 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
             }
         }//fin del metodo buscar en BD
     
+    
+    
+    //*************************************** MODIFICAR ******************************************
+    
     public void modificarEnArchivosPlanos()
     {
         metodosCursos.modificarEstudiante(frm_MantenimientoCursos.devolverInformacion());
         frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta, en archivos planos.");
         frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo modificar en Archivos Planos
+    
+    public void modificarEnArhivosXML()
+    {
+        controlador_Principal.metodos_XML_Cursos.modificarInformacionDelXml(frm_MantenimientoCursos.devolverInformacion());
+        frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta, en archivos planos.");
+        frm_MantenimientoCursos.resetearGUI();
+    }
     
     public void modificarEnBD()
     {
@@ -185,12 +231,21 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
             frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo modificar en BD
       
+    
+    //**************************************** ELIMINAR ******************************************
     public void eliminarEnArchivosPlanos()
     {
         metodosCursos.eliminarEstudiante();
         frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta, en archivos planos.");
         frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo eliminar en archivos planos
+    
+    public void eliminarEnArchivosXML()
+    {
+        controlador_Principal.metodos_XML_Cursos.eliminarInformacionDelXml(frm_MantenimientoCursos.devolverSigla());
+        frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta, en archivos planos.");
+        frm_MantenimientoCursos.resetearGUI();
+    }
     
     public void eliminarEnBD()
     {
