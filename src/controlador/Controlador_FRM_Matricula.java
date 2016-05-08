@@ -276,7 +276,7 @@ public class Controlador_FRM_Matricula implements ActionListener
         {
             if(conexionBD.consultarCurso(frm_Matricula.devolverSigla()))
             {
-                frm_Matricula.mostrarInformacionEstudiante(conexionBD.getArregloCursos()[0]);
+                frm_Matricula.mostrarInformacionCurso(conexionBD.getArregloCursos()[0]);
                 verificarEstudiante=true;
                 habilitarAgregar();
             }
