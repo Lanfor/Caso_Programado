@@ -89,18 +89,41 @@ public class Controlador_FRM_Matricula implements ActionListener
         }
         
         if(e.getActionCommand().equalsIgnoreCase("Modificar"))
-        {                                                                     
-            metodosMatriculas.modificarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada(),frm_Matricula.devolverSigla());
-            frm_Matricula.desabilitarBotones();
-            frm_Matricula.limpiadoInicial();
-            frm_Matricula.colocarCodigo();
+        {      
+            switch(controlador.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    modificarEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
         
         if(e.getActionCommand().equalsIgnoreCase("Eliminar"))
         {
-            metodosMatriculas.eliminarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada());
-            frm_Matricula.borrarFila();
-            frm_Matricula.desabilitarBotones();
+            switch(controlador.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                    eliminarEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
         }
         
         if(e.getActionCommand().equalsIgnoreCase("Consultar"))
@@ -117,7 +140,7 @@ public class Controlador_FRM_Matricula implements ActionListener
     
     
     
-    
+ //****************************************METODOS ARCHIVOS PLANOS*************************************   
     
     public void buscarEstudianteEnArchivosPlanos()
     {
@@ -148,6 +171,21 @@ public class Controlador_FRM_Matricula implements ActionListener
             frm_Matricula.resetearGUI();
         }
     }//fin del metodo buscar curso en archivo Planos
+    
+    public void modificarEnArchivosPlanos()
+    {
+         metodosMatriculas.modificarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada(),frm_Matricula.devolverSigla());
+            frm_Matricula.desabilitarBotones();
+            frm_Matricula.limpiadoInicial();
+            frm_Matricula.colocarCodigo();
+    }//fin del metodo modificar en archivos planos
+    
+    public void eliminarEnArchivosPlanos()
+    {
+        metodosMatriculas.eliminarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada());
+        frm_Matricula.borrarFila();
+        frm_Matricula.desabilitarBotones();
+    }//metodo de eliminar en archivos planos
     
     public void habilitarAgregar()
     {
@@ -188,4 +226,21 @@ public class Controlador_FRM_Matricula implements ActionListener
         frm_Matricula.resetearGUI();
         verificarCurso=false;
     }
-}
+    
+    
+    //**************************************METODOS BASE DE DATOS***********************************
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //***************************************METODOS ARCHIVOS XML************************************
+    
+}//FIN DE LA CLASE CONTROLADOR_FRM_MATRICULA
