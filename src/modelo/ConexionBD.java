@@ -217,7 +217,7 @@ public class ConexionBD {
         }
     }
     
-    
+//********************************************** M  A  T  R  I  C  U  L  A ************************************************************************//
     public boolean registrarMatricula(String arreglo[])
     {
         ResultSet rs = null;
@@ -226,13 +226,12 @@ public class ConexionBD {
         try 
         {
             cmd = con.createStatement();
-            rs = cmd.executeQuery("SELECT * FROM `detalle_matricula`  WHERE codigo='"+arreglo[0]+"' AND sigla='"+arreglo[2]+"'");
+            ejecuto = cmd.execute("SELECT * FROM `detalle_matricula` WHERE codigo='"+arreglo[0]+"' AND sigla='"+arreglo[3]+"'");
             //       NO ESTOY SEGURO DE ESTE METODO, MI CABEZA ESTÁ CERRADA
-            if( !(rs.getString("codigo").equals(arreglo[0]))   && !(rs.getString("sigla").equals(arreglo[2])) )
+            if(ejecuto)
             {
-                cmd = con.createStatement();
-                ejecuto = cmd.execute("INSERT INTO `datalle_matricula`(`codigo`, `cedula`, `sigla`) VALUES ('"+arreglo[0]+"','"+arreglo[1]+"','"+arreglo[2]+"')");
-                
+                ejecuto = cmd.execute("INSERT INTO `detalle_matricula`(`codigo`, `cedula`, `nombre`, `sigla`)  VALUES ('"+arreglo[0]+"','"+arreglo[1]+"','"+arreglo[2]+"','"+arreglo[3]+"')");
+
                 return true;
             }
             // rs.close();
@@ -272,7 +271,7 @@ public class ConexionBD {
     {
         ResultSet rs = null;
         Statement cmd = null;
-        int numMayor=1;
+        ArrayList<String> arrayMatricula=new ArrayList<String>();
         String codigo="0000";
         try 
         {
@@ -281,12 +280,20 @@ public class ConexionBD {
                 
                 while (rs.next()) 
                 {
-                    if(Integer.parseInt(rs.getString("codigo"))>numMayor)
-                        numMayor=Integer.parseInt(rs.getString("codigo"));
+                    arrayMatricula.add(rs.getString("codigo"));
                 }
-                rs.close();
-                codigo=codigo+numMayor;
-                codigo=codigo.substring(codigo.length()-5,codigo.length());
+                if(arrayMatricula.size()==0)
+                {
+                   codigo+=1;
+                }
+                else
+                {
+                    int numero=Integer.parseInt((arrayMatricula.get(arrayMatricula.size()-1)));
+                    numero++;
+
+                    codigo="0000"+numero;
+                }
+                codigo=codigo.substring(codigo.length()-5, codigo.length());
         }
         catch(Exception e)
         {

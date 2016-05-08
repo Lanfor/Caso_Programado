@@ -277,7 +277,7 @@ public class Controlador_FRM_Matricula implements ActionListener
             if(conexionBD.consultarCurso(frm_Matricula.devolverSigla()))
             {
                 frm_Matricula.mostrarInformacionCurso(conexionBD.getArregloCursos()[0]);
-                verificarEstudiante=true;
+                verificarCurso=true;
                 habilitarAgregar();
             }
             else
@@ -311,12 +311,13 @@ public class Controlador_FRM_Matricula implements ActionListener
     public void finalizarMatriculaEnBD()
     {
         ConexionBD conexionBD=controlador_Principal.conexionBD;
-        String arreglo[] = new String [3];
+        String arreglo[] = new String [4];
             for (int contador = 0; contador < frm_Matricula.getCantidadFilas(); contador++) 
             {
                 arreglo[0]=frm_Matricula.devolverCodigo();
                 arreglo[1]=frm_Matricula.devolverDato(contador,1);
-                arreglo[2]=frm_Matricula.devolverDato(contador,3);
+                arreglo[2]=frm_Matricula.devolverDato(contador, 2);
+                arreglo[3]=frm_Matricula.devolverDato(contador,3);
                 conexionBD.registrarMatricula(arreglo);
             }
             frm_Matricula.desabililitarFinalizar();
