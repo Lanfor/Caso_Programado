@@ -111,7 +111,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
         {
             metodosCursos.agregarCursos(frm_MantenimientoCursos.devolverInformacion());
-           frm_MantenimientoCursos.mostrarMensaje("El estudiante fue registrado de forma correcta");
+           frm_MantenimientoCursos.mostrarMensaje("El Curso fue registrado de forma correcta, en archivos Planos");
            frm_MantenimientoCursos.resetearGUI(); 
         }
         else
@@ -126,7 +126,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
          if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
         {
             controlador_Principal.conexionBD.registrarCurso(frm_MantenimientoCursos.devolverInformacion());
-            frm_MantenimientoCursos.mostrarMensaje("Usuario registrado con exito");
+            frm_MantenimientoCursos.mostrarMensaje("Curso registrado con exito, en la base de datos");
             frm_MantenimientoCursos.resetearGUI();   
         }
          else
@@ -145,7 +145,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
             }
             else
             {
-                int valor=frm_MantenimientoCursos.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                int valor=frm_MantenimientoCursos.mostrarMensajeVerificacion("La Sigla buscada no se encuentra, Desea agregarlo?.");
                 if(valor==0)
                 frm_MantenimientoCursos.habilitarAgregar();
                 else
@@ -174,26 +174,28 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     public void modificarEnArchivosPlanos()
     {
         metodosCursos.modificarEstudiante(frm_MantenimientoCursos.devolverInformacion());
+        frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta, en archivos planos.");
         frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo modificar en Archivos Planos
     
     public void modificarEnBD()
     {
             controlador_Principal.conexionBD.modificarCurso(frm_MantenimientoCursos.devolverInformacion());
-            frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta.");
+            frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta, en la Base de Datos.");
             frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo modificar en BD
       
     public void eliminarEnArchivosPlanos()
     {
         metodosCursos.eliminarEstudiante();
+        frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta, en archivos planos.");
         frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo eliminar en archivos planos
     
     public void eliminarEnBD()
     {
             controlador_Principal.conexionBD.eliminarCurso(frm_MantenimientoCursos.devolverInformacion());
-            frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta.");
+            frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta, en la Base de Datos.");
             frm_MantenimientoCursos.resetearGUI();
     }
     

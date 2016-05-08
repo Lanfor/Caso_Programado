@@ -91,6 +91,7 @@ public class Metodos_XML_Matricula
             System.err.println("Error al crear el archivo XML: " + e);
         }
     }
+    
     public boolean cargarXML() //Método nuevo en pruebas
     {
         boolean cargo=false;
@@ -112,6 +113,7 @@ public class Metodos_XML_Matricula
         }
         return cargo;
     } 
+    
     public void guardarEnXML(String arregloInformacion[])//Método nuevo en pruebas
     {
         try{
