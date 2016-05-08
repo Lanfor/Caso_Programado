@@ -35,23 +35,43 @@ public class Controlador_FRM_TipoAlmacenamiento implements ActionListener
                     {
                         controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Archivo Plano");
                         controlador_FRM_VentanaPrincipal.metodosUsuarios.cargarArray();
+                        
                         if(controlador_FRM_VentanaPrincipal.metodosUsuarios.getTamano()==0)
-                            controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show();
+                        {
+                           controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show(); 
+                        }
+                            
                         else
-                            controlador_FRM_VentanaPrincipal.frm_LogIn.show();
+                        {
+                          controlador_FRM_VentanaPrincipal.frm_LogIn.show();  
+                        }
+                            
                     }
                     else if(frm_TipoAlmacenamiento.selecionArchivoXML())
+                    {
                         controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Archivo XML");
-                    /*  
-                        controlador_FRM_VentanaPrincipal.metodos_XML_Usuarios.cargar
-                    */
+                        if(controlador_FRM_VentanaPrincipal.metodos_XML_Usuarios.haveInformatioInXml())
+                        {
+                            controlador_FRM_VentanaPrincipal.frm_LogIn.show();
+                        }
+                        else
+                        {
+                            controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show(); 
+                        }
+                    }
                     else
                     {
                         controlador_FRM_VentanaPrincipal.setTipoAlmacenamiento("Base de Datos");
                         if(controlador_FRM_VentanaPrincipal.conexionBD.haveUsers())
-                        controlador_FRM_VentanaPrincipal.frm_LogIn.show();
+                        {
+                             controlador_FRM_VentanaPrincipal.frm_LogIn.show();
+                        }
+                       
                         else
-                             controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show();
+                        {
+                           controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show(); 
+                        }
+                             
                     }
                 frm_TipoAlmacenamiento.dispose();
             break;

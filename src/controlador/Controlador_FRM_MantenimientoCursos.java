@@ -173,9 +173,14 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
     public void buscarEnArchivosXML()
     {
-        if(controlador_Principal.metodosCursos.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
+        if(controlador_Principal.metodos_XML_Cursos.consultarInformacionDelXml(frm_MantenimientoCursos.devolverSigla()))
             {
-                frm_MantenimientoCursos.mostrarInformacion(metodosCursos.getArregloInformacion());
+                String arreglo[] = new String[3];
+                arreglo[0] = controlador_Principal.metodos_XML_Cursos.getArregloInformacion()[1];
+                arreglo[1] = controlador_Principal.metodos_XML_Cursos.getArregloInformacion()[2];
+                arreglo[2] = controlador_Principal.metodos_XML_Cursos.getArregloInformacion()[3];
+                
+                frm_MantenimientoCursos.mostrarInformacion(arreglo);
                 frm_MantenimientoCursos.habilitarEdicion();
             }
             else

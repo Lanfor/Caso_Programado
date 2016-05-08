@@ -142,7 +142,10 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         {
             if(controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.consultarInformacionDelXml(frm_MantenimientoEstudiantes.devolverCedula()))
             {
-                frm_MantenimientoEstudiantes.mostrarInformacion(metodosEstudiantes.getArregloInformacion());
+                String arreglo[] = new String[2];
+                arreglo[0] = controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.getArregloInformacion()[1];
+                arreglo[1] = controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.getArregloInformacion()[2];
+                frm_MantenimientoEstudiantes.mostrarInformacion(arreglo);
                 frm_MantenimientoEstudiantes.habilitarEdicion();
             }
             else
