@@ -8,6 +8,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import modelo.ConexionBD;
 import modelo.MetodosCursos;
 import modelo.MetodosEstudiantes;
 import modelo.MetodosMatriculas;
@@ -50,7 +51,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    
+                    buscarEstudianteEnBD();
                 break;
                 default:
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
@@ -69,7 +70,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    
+                    buscarCursoEnBD();
                 break;
                 default:
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
@@ -95,7 +96,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    
+                    finalizarMatriculaEnBD();
                 break;
                 default:
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
@@ -114,7 +115,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    
+                    modificarEnBD();
                 break;
                 default:
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
@@ -133,7 +134,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    
+                    eliminarEnBD();
                 break;
                 default:
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
@@ -142,6 +143,7 @@ public class Controlador_FRM_Matricula implements ActionListener
         
         if(e.getActionCommand().equalsIgnoreCase("Consultar"))
         {
+            //WE NEED THIS METHOD FOR ALL TIPES FILES
             frm_Matricula.resetearVentana();
            if(!metodosMatriculas.consultarMatricula(frm_Matricula.devolverCodigo()))
                frm_Matricula.mostrarMensaje("Código Invalido");
@@ -149,8 +151,6 @@ public class Controlador_FRM_Matricula implements ActionListener
                frm_Matricula.habililitarFinalizar();
         }
     }
-    
-    
     
     
     
@@ -181,14 +181,15 @@ public class Controlador_FRM_Matricula implements ActionListener
         }
         else
         {
-            frm_Matricula.mostrarMensaje("La Sigla buscada no se encuentra.");
+            frm_Matricula.mostrarMensaje("La Sigla buscada no se encuentra en los archivos planos");
             frm_Matricula.resetearGUI();
         }
     }//fin del metodo buscar curso en archivo Planos
     
     public void modificarEnArchivosPlanos()
     {
-         metodosMatriculas.modificarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada(),frm_Matricula.devolverSigla());
+                                                               //L sigla vieja del curso se cambia por la nueva
+        metodosMatriculas.modificarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada(),frm_Matricula.devolverSigla());
             frm_Matricula.desabilitarBotones();
             frm_Matricula.limpiadoInicial();
             frm_Matricula.colocarCodigo();
@@ -245,12 +246,85 @@ public class Controlador_FRM_Matricula implements ActionListener
     //**************************************METODOS BASE DE DATOS***********************************
     
     
+    public void buscarEstudianteEnBD()
+    {
+        ConexionBD conexionBD=controlador_Principal.conexionBD;
+        
+        if(controlador_Principal.vericar.verificarVacio(frm_Matricula.devolverCedula()) && controlador_Principal.vericar.verificarNumero(frm_Matricula.devolverCedula()))
+        {
+            if(conexionBD.consultarEstudiante(frm_Matricula.devolverCedula()))
+            {
+                frm_Matricula.mostrarInformacionEstudiante(conexionBD.getArregloEstudiantes()[0]);
+                verificarEstudiante=true;
+                habilitarAgregar();
+            }
+            else
+            {
+                frm_Matricula.mostrarMensaje("La cédula buscada no se encuentra en la Base de datos");
+                frm_Matricula.resetearGUI();
+            }
+        }
+        else
+        frm_Matricula.mostrarMensaje("Debe digitar un número de cédula que contenga solo numeros");
+    }//fin del metodo buscar Estudiante
     
+    public void buscarCursoEnBD()
+    {
+        ConexionBD conexionBD=controlador_Principal.conexionBD;
+        
+        if(controlador_Principal.vericar.verificarVacio(frm_Matricula.devolverSigla()))
+        {
+            if(conexionBD.consultarCurso(frm_Matricula.devolverSigla()))
+            {
+                frm_Matricula.mostrarInformacionEstudiante(conexionBD.getArregloCursos()[0]);
+                verificarEstudiante=true;
+                habilitarAgregar();
+            }
+            else
+            {
+                frm_Matricula.mostrarMensaje("La sigla buscada no se encuentra en la Base de Datos");
+                frm_Matricula.resetearGUI();
+            }
+        }
+        else
+        frm_Matricula.mostrarMensaje("Debe digitar una sigla para buscar en la Base de Datos");
+    }//fin del metodo buscar Curso
     
+    public void modificarEnBD()
+    {
+        ConexionBD conexionBD=controlador_Principal.conexionBD;
+        //                                                           La sigla vieja del curso se cambia por la nueva
+        conexionBD.modificarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada(),frm_Matricula.devolverSigla());
+        frm_Matricula.desabilitarBotones();
+        frm_Matricula.limpiadoInicial();
+        frm_Matricula.colocarCodigo();
+    }//fin del metodo modificar en archivos planos
     
+    public void eliminarEnBD()
+    {
+        ConexionBD conexionBD=controlador_Principal.conexionBD;
+        conexionBD.eliminarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada());
+        frm_Matricula.borrarFila();
+        frm_Matricula.desabilitarBotones();
+    }//metodo de eliminar en archivos planos
     
-    
-    
+    public void finalizarMatriculaEnBD()
+    {
+        ConexionBD conexionBD=controlador_Principal.conexionBD;
+        String arreglo[] = new String [3];
+            for (int contador = 0; contador < frm_Matricula.getCantidadFilas(); contador++) 
+            {
+                arreglo[0]=frm_Matricula.devolverCodigo();
+                arreglo[1]=frm_Matricula.devolverDato(contador,1);
+                arreglo[2]=frm_Matricula.devolverDato(contador,3);
+                conexionBD.registrarMatricula(arreglo);
+            }
+            frm_Matricula.desabililitarFinalizar();
+            frm_Matricula.resetearVentana();
+            verificarEstudiante=false;
+            frm_Matricula.limpiadoInicial();
+            frm_Matricula.colocarCodigo();
+    }
     
     
     

@@ -80,7 +80,7 @@ public class ConexionBD {
         boolean existo=false;
         try {
                 cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `estudiantes` WHERE cedula="+cedula);
+                rs = cmd.executeQuery("SELECT * FROM `estudiantes` WHERE cedula='"+cedula+"'");
                 
                 while (rs.next()) 
                 {
@@ -223,19 +223,26 @@ public class ConexionBD {
         ResultSet rs = null;
         Statement cmd = null;
         boolean ejecuto;
-        try {
+        try 
+        {
+            cmd = con.createStatement();
+            rs = cmd.executeQuery("SELECT * FROM `detalle_matricula`  WHERE codigo='"+arreglo[0]+"' AND sigla='"+arreglo[2]+"'");
+            //       NO ESTOY SEGURO DE ESTE METODO, MI CABEZA ESTÁ CERRADA
+            if( !(rs.getString("codigo").equals(arreglo[0]))   && !(rs.getString("sigla").equals(arreglo[2])) )
+            {
                 cmd = con.createStatement();
                 ejecuto = cmd.execute("INSERT INTO `datalle_matricula`(`codigo`, `cedula`, `sigla`) VALUES ('"+arreglo[0]+"','"+arreglo[1]+"','"+arreglo[2]+"')");
                 
-               return true;
-               // rs.close();
+                return true;
+            }
+            // rs.close();
         }
         catch(Exception e)
         {
             System.out.println("SQLException ejecutando sentencia registrarMatricula: " + e.getMessage());
             return false;
         }
-        
+       return false;
     }
     public void consultarMatricula(String codigo)
     {
@@ -244,7 +251,7 @@ public class ConexionBD {
 
         try {
                 cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula` WHERE codigo="+codigo);
+                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula` WHERE codigo='"+codigo+"'");
                 
                 while (rs.next()) 
                 {
@@ -287,14 +294,14 @@ public class ConexionBD {
         }
         return  codigo;
     }
-    public boolean modificarMatricula(String[] arreglo)
+    public boolean modificarMatricula(String codigo,String siglaVieja, String siglaNueva)
     {
         ResultSet rs = null;
         Statement cmd = null;
         boolean ejecuto;
         try {
                 cmd = con.createStatement();
-                ejecuto = cmd.execute("UPDATE `detalle_matricula` SET `codigo`='"+arreglo[0]+"',`cedula`='"+arreglo[1]+"',`sigla`='"+arreglo[2]+"' WHERE codigo='"+arreglo[0]+"'");
+                ejecuto = cmd.execute("UPDATE `detalle_matricula` SET `sigla`='"+siglaNueva+"' WHERE codigo='"+codigo+"' AND sigla='"+siglaVieja+"'");
                 
                return true;
                // rs.close();
@@ -312,7 +319,7 @@ public class ConexionBD {
         boolean ejecuto;
         try {
                 cmd = con.createStatement();
-                ejecuto = cmd.execute("DELETE FROM `detalle_matricula` WHERE codigo='"+codigo+"' and sigla='"+sigla+"'");
+                ejecuto = cmd.execute("DELETE FROM `detalle_matricula` WHERE codigo='"+codigo+"' AND sigla='"+sigla+"'");
                 
                return true;
                // rs.close();

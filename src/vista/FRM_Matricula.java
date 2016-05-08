@@ -133,10 +133,10 @@ public class FRM_Matricula extends javax.swing.JFrame {
             //Falta XML
             break;
             case "Base de Datos":
-                  
+                  this.panel_InformacionMatricula1.colocarCodigo(controlador.controlador_Principal.conexionBD.devolverCodigo());
             break;
             default:
-            mostrarMensaje("Error 407 ha fallado el sistema");
+            mostrarMensaje("Error 407 ha fallado el sistema NO se ha colocado el código");
             
         }
         

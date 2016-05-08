@@ -46,7 +46,7 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
     public MetodosUsuarios metodosUsuarios;
 
 //******************* C O N E X I O N *************************************//
-    ConexionBD conexionBD;
+    public ConexionBD conexionBD;
 //******************* A R C H I V O S - X M L *******************************//
     Metodos_XML_Usuarios metodos_XML_Usuarios;
     Metodos_XML_Estudiantes metodos_XML_Estudiantes;

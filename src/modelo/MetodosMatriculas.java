@@ -125,7 +125,6 @@ public class MetodosMatriculas
             if(arrayMatricula.get(i).getCodigo().equalsIgnoreCase(codigo) && arrayMatricula.get(i).getSigla().equalsIgnoreCase(siglaVieja))
             {   
                 arrayMatricula.get(i).setSigla(nuevaSigla);
-                System.out.println("Se ha modificado Exitosamente");
                 System.out.println("Codigo:"+arrayMatricula.get(i).getCodigo()+" Cedula: "+arrayMatricula.get(i).getCedula()+" Sigla: "+arrayMatricula.get(i).getSigla());
             }
         }
