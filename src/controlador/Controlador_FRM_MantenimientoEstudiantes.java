@@ -118,7 +118,6 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             else
             {
                 int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
-                System.out.println("Me devuelve "+ valor);
                 if(valor==0)
                 frm_MantenimientoEstudiantes.habilitarAgregar();
                 else
@@ -143,7 +142,6 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             else
             {
                 int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
-                System.out.println("Me devuelve "+ valor);
                 if(valor==0)
                 frm_MantenimientoEstudiantes.habilitarAgregar();
                 else
@@ -166,7 +164,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                     if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
                     {
                             metodosEstudiantes.agregarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-                            frm_MantenimientoEstudiantes.mostrarMensaje("Usuario registrado con exito");
+                            frm_MantenimientoEstudiantes.mostrarMensaje("Estudiante registrado con exito, en archivos planos");
                             frm_MantenimientoEstudiantes.resetearGUI();   
                     }
                     else
@@ -195,7 +193,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                     if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
                     {
                             controlador_FRM_VentanaPrincipal.conexionBD.registrarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-                            frm_MantenimientoEstudiantes.mostrarMensaje("Usuario registrado con exito");
+                            frm_MantenimientoEstudiantes.mostrarMensaje("Estudiante registrado con exito, en la Base de Datos");
                             frm_MantenimientoEstudiantes.resetearGUI();   
                     }
                     else
@@ -221,7 +219,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
         {
             metodosEstudiantes.modificarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta, en los Arhivos Planos.");
             frm_MantenimientoEstudiantes.resetearGUI();
         }
         else
@@ -236,7 +234,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
         {
             controlador_FRM_VentanaPrincipal.conexionBD.modificarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta, en la Base de Datos.");
             frm_MantenimientoEstudiantes.resetearGUI();
         }
         else
