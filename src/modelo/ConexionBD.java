@@ -130,33 +130,7 @@ public class ConexionBD {
             return false;
         }
     }
-    public ArrayList<Estudiante> crearArrayEstudiantes()
-    {
-        ResultSet rs = null;
-        Statement cmd = null;
-        ArrayList<Estudiante> arrayEstudiantes = new ArrayList <Estudiante>();
-        try {
-                cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `estudiantes` ");
-                
-                while (rs.next()) 
-                {
-                    String cedula = rs.getString("cedula");
-                    String nombre = rs.getString("nombre");
-                    String direccion = rs.getString("direccion");
-                    
-                    Estudiante temporal = new Estudiante(cedula,nombre,direccion);
-                    arrayEstudiantes.add(temporal);
-                }
-                
-                rs.close();
-        }
-        catch(Exception e)
-        {
-            System.out.println("SQLException ejecutando sentencia: " + e.getMessage());
-        }
-        return arrayEstudiantes;
-    }
+    
     
     public boolean registrarCurso(String arreglo[])
     {
@@ -177,14 +151,11 @@ public class ConexionBD {
         }
         
     }
-    
     String arregloCursos[] = new String[3];
-    
     public String[] getArregloCursos()
     {
         return arregloCursos;
     }
-    
     public boolean consultarCurso(String sigla)
     {
         ResultSet rs = null;
@@ -209,7 +180,6 @@ public class ConexionBD {
         }
         return existo;
     }
-    
     public boolean modificarCurso(String[] arreglo)
     {
         ResultSet rs = null;
@@ -246,33 +216,8 @@ public class ConexionBD {
             return false;
         }
     }
-    public ArrayList<Cursos> crearArrayCursos()
-    {
-        ResultSet rs = null;
-        Statement cmd = null;
-        ArrayList<Cursos> arrayCursos = new ArrayList <Cursos>();
-        try {
-                cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `cursos`");
-                
-                while (rs.next()) 
-                {
-                    String sigla = rs.getString("sigla");
-                    String nombre = rs.getString("nombre");
-                    int creditos = rs.getInt("creditos");
-                    String horario = rs.getString("horario");
-                    Cursos temporal = new Cursos(sigla,nombre,creditos,horario);
-                    arrayCursos.add(temporal);
-                }
-                
-                rs.close();
-        }
-        catch(Exception e)
-        {
-            System.out.println("SQLException ejecutando sentencia: " + e.getMessage());
-        }
-        return arrayCursos;
-    }
+    
+    
     public boolean registrarMatricula(String arreglo[])
     {
         ResultSet rs = null;
@@ -292,10 +237,6 @@ public class ConexionBD {
         }
         
     }
-    
-    
-    
-    
     public void consultarMatricula(String codigo)
     {
         ResultSet rs = null;
@@ -303,7 +244,7 @@ public class ConexionBD {
 
         try {
                 cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `datalle_matricula` WHERE codigo="+codigo);
+                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula` WHERE codigo="+codigo);
                 
                 while (rs.next()) 
                 {
@@ -319,6 +260,32 @@ public class ConexionBD {
         {
             System.out.println("SQLException ejecutando sentencia consultarMatricula: " + e.getMessage());
         }
+    }
+    public String devolverCodigo()
+    {
+        ResultSet rs = null;
+        Statement cmd = null;
+        int numMayor=1;
+        String codigo="0000";
+        try 
+        {
+                cmd = con.createStatement();
+                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula`");
+                
+                while (rs.next()) 
+                {
+                    if(Integer.parseInt(rs.getString("codigo"))>numMayor)
+                        numMayor=Integer.parseInt(rs.getString("codigo"));
+                }
+                rs.close();
+                codigo=codigo+numMayor;
+                codigo=codigo.substring(codigo.length()-5,codigo.length());
+        }
+        catch(Exception e)
+        {
+            System.out.println("SQLException ejecutando sentencia consultarMatricula: " + e.getMessage());
+        }
+        return  codigo;
     }
     public boolean modificarMatricula(String[] arreglo)
     {
@@ -355,32 +322,6 @@ public class ConexionBD {
             System.out.println("SQLException ejecutando sentencia eliminarMatricula: " + e.getMessage());
             return false;
         }
-    }
-    public ArrayList<Matricula> crearArrayMatricula()
-    {
-        ResultSet rs = null;
-        Statement cmd = null;
-        ArrayList<Matricula> arrayMatricula= new ArrayList <Matricula>();
-        try {
-                cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula`");
-                
-                while (rs.next()) 
-                {
-                    String sigla = rs.getString("sigla");
-                    String codigo = rs.getString("codigo");
-                    String cedula = rs.getString("cedula");
-                    Matricula temporal = new Matricula(codigo,cedula,sigla,true);
-                    arrayMatricula.add(temporal);
-                }
-                
-                rs.close();
-        }
-        catch(Exception e)
-        {
-            System.out.println("SQLException ejecutando sentencia crearArrayMatricula: " + e.getMessage());
-        }
-        return arrayMatricula;
     }
 //******************************************  Usuarios  ************************************************************//
     String[] arregloUsuario=new String[3];
