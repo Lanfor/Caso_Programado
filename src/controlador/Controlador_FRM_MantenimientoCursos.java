@@ -19,7 +19,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
 {
     FRM_MantenimientoCursos frm_MantenimientoCursos;
     MetodosCursos metodosCursos;
-    public Controlador_FRM_VentanaPrincipal controlador;
+    public Controlador_FRM_VentanaPrincipal controlador_Principal;
     public Controlador_FRM_MantenimientoCursos(FRM_MantenimientoCursos frm_MantenimientoCursos, MetodosCursos metodosCursos)
     {
         this.frm_MantenimientoCursos = frm_MantenimientoCursos;
@@ -30,7 +30,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     {
         if(evento.getActionCommand().equals("Agregar"))
         {
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     registrarEnArchivosPlanos();
@@ -49,8 +49,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
         if(evento.getActionCommand().equals("Consultar") || evento.getActionCommand().equals("ConsultaRapida"))
         {
-            frm_MantenimientoCursos.enviarControlPricipal(controlador);
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     buscarEnArchivosPlanos();
@@ -69,7 +68,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
         if(evento.getActionCommand().equals("Modificar"))
         {
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     modificarEnArchivosPlanos();
@@ -88,7 +87,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
         if(evento.getActionCommand().equals("Eliminar"))
         {
-            switch(controlador.getTipoAlmacenamiento())
+            switch(controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     eliminarEnArchivosPlanos();
@@ -109,7 +108,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
     public void registrarEnArchivosPlanos()
     {
-        if(controlador.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
+        if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
         {
             metodosCursos.agregarCursos(frm_MantenimientoCursos.devolverInformacion());
            frm_MantenimientoCursos.mostrarMensaje("El estudiante fue registrado de forma correcta");
@@ -124,9 +123,9 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
      public void registarConBD()
     {
-         if(controlador.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
+         if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
         {
-            controlador.conexionBD.registrarCurso(frm_MantenimientoCursos.devolverInformacion());
+            controlador_Principal.conexionBD.registrarCurso(frm_MantenimientoCursos.devolverInformacion());
             frm_MantenimientoCursos.mostrarMensaje("Usuario registrado con exito");
             frm_MantenimientoCursos.resetearGUI();   
         }
@@ -157,9 +156,9 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     public void buscarEnBD()
     {
         
-            if(controlador.conexionBD.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
+            if(controlador_Principal.conexionBD.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
             {
-                frm_MantenimientoCursos.mostrarInformacion(controlador.conexionBD.getArregloCursos());
+                frm_MantenimientoCursos.mostrarInformacion(controlador_Principal.conexionBD.getArregloCursos());
                 frm_MantenimientoCursos.habilitarEdicion();
             }
             else
@@ -180,7 +179,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
     public void modificarEnBD()
     {
-            controlador.conexionBD.modificarCurso(frm_MantenimientoCursos.devolverInformacion());
+            controlador_Principal.conexionBD.modificarCurso(frm_MantenimientoCursos.devolverInformacion());
             frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta.");
             frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo modificar en BD
@@ -193,7 +192,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
     public void eliminarEnBD()
     {
-            controlador.conexionBD.eliminarCurso(frm_MantenimientoCursos.devolverInformacion());
+            controlador_Principal.conexionBD.eliminarCurso(frm_MantenimientoCursos.devolverInformacion());
             frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta.");
             frm_MantenimientoCursos.resetearGUI();
     }

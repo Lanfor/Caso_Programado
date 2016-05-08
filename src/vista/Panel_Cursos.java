@@ -198,7 +198,7 @@ public class Panel_Cursos extends javax.swing.JPanel
 
     private void jt_SiglasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_SiglasKeyPressed
         if(evt.getKeyCode()==10)
-            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            switch(controlador.controlador_Principal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     controlador.buscarEnArchivosPlanos();
