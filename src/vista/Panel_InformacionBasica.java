@@ -70,10 +70,6 @@ public class Panel_InformacionBasica extends javax.swing.JPanel {
         this.jt_NombreCompleto.setEnabled(true);
         this.jt_Direccion.setEnabled(true);
     }
-    public void recibirControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
-    {
-        this.controlador_FRM_VentanaPrincipal=controlador_FRM_VentanaPrincipal;
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -150,7 +146,7 @@ public class Panel_InformacionBasica extends javax.swing.JPanel {
         
       if(evt.getKeyCode()==10)
         {
-            switch(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
+            switch(controlador.controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento())
             {
                 case "Archivo Plano":
                     controlador.buscarArchivosPlanos();

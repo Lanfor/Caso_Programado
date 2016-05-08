@@ -47,10 +47,6 @@ public class FRM_MantenimientoCursos extends javax.swing.JFrame {
         this.panel_Botones1.habilitarEdicion();
         this.panel_Cursos1.habilitarEdicion();
     }
-    public void enviarControlPricipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
-    {
-        this.panel_Cursos1.recibirControlPrincipal(controlador_FRM_VentanaPrincipal);
-    }
     public void mostrarInformacion(String arreglo[])
     {
         this.panel_Cursos1.mostrarInformacion(arreglo);

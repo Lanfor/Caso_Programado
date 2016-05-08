@@ -97,10 +97,6 @@ public class Panel_Cursos extends javax.swing.JPanel
         this.jt_Horario.setEnabled(false);
         this.jt_Horario.setText("");
         
-    } 
-    public void recibirControlPrincipal(Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal)
-    {
-        this.controlador_FRM_VentanaPrincipal=controlador_FRM_VentanaPrincipal;
     }
     /**
      * This method is called from within the constructor to initialize the form.
