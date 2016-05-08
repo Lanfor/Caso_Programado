@@ -62,7 +62,7 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
                         {
                             controlador_FRM_VentanaPrincipal.metodos_XML_Usuarios.guardarEnXML(frm_RegistroUsuarios.devolverInformacion());
                             frm_RegistroUsuarios.usuarioNegro();
-                            frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito");
+                            frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito en archivos XML");
                             frm_RegistroUsuarios.resetearVentana();
                             frm_RegistroUsuarios.hide();
                             frm_VentanaPrincipal.show();
@@ -96,7 +96,7 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
                         {
                             conexionBD.registrarUsuario(frm_RegistroUsuarios.devolverInformacion());
                             frm_RegistroUsuarios.usuarioNegro();
-                            frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito");
+                            frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito en la Base de Datos");
                             frm_RegistroUsuarios.resetearVentana();
                             frm_RegistroUsuarios.hide();
                             frm_VentanaPrincipal.show();
@@ -123,20 +123,32 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
     public void registarConArchivosPlanos()
     {
         if(controlador_FRM_VentanaPrincipal.vericar.verificarLetras(frm_RegistroUsuarios.devolverInformacion()[0]))
-            if(!metodosUsuarios.consultarUsuario(frm_RegistroUsuarios.devolverInformacion()[0]))
+        {
+            if(controlador_FRM_VentanaPrincipal.vericar.verificarSimbolo(frm_RegistroUsuarios.devolverInformacion()[1]))
             {
-                metodosUsuarios.agregarUsuario(frm_RegistroUsuarios.devolverInformacion());
-                frm_RegistroUsuarios.usuarioNegro();
-                frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito");
-                frm_RegistroUsuarios.resetearVentana();
-                frm_RegistroUsuarios.hide();
-                frm_VentanaPrincipal.show();
+                if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_RegistroUsuarios.devolverInformacion()[2]))
+                {
+                    if(!metodosUsuarios.consultarUsuario(frm_RegistroUsuarios.devolverInformacion()[0]))
+                    {
+                        metodosUsuarios.agregarUsuario(frm_RegistroUsuarios.devolverInformacion());
+                        frm_RegistroUsuarios.usuarioNegro();
+                        frm_RegistroUsuarios.mostrarMensaje("Usuario registrado con exito en los Archivos Planos");
+                        frm_RegistroUsuarios.resetearVentana();
+                        frm_RegistroUsuarios.hide();
+                        frm_VentanaPrincipal.show();
+                    }
+                    else
+                    {
+                        frm_RegistroUsuarios.mostrarMensaje("Este nombre de usuario ya existe");
+                        frm_RegistroUsuarios.usuarioRojo();
+                    }
+                }
+                else
+                    frm_RegistroUsuarios.mostrarMensaje("Digita una cotraseña");
             }
             else
-            {
-                frm_RegistroUsuarios.mostrarMensaje("Este nombre de usuario ya existe");
-                frm_RegistroUsuarios.usuarioRojo();
-            }
+                frm_RegistroUsuarios.mostrarMensaje("Correo incorrecto, te mostraremos el formato correcto\nEjemplo:\n        juan@extencion.com");
+        }
         else
             frm_RegistroUsuarios.mostrarMensaje("El nombre de usuario debe contener solo letras");
     }

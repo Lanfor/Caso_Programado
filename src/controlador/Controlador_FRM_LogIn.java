@@ -69,7 +69,7 @@ public class Controlador_FRM_LogIn implements ActionListener
         {
             if(conexionBD.consultarUsuario(frm_Ventana_LogIn.devolverUsuario()) && conexionBD.getArregloUsuario()[1].equals(frm_Ventana_LogIn.devolverContraseña()))
             {
-                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"* + * + * + * + * + * + * + "+conexionBD.getArregloUsuario()[2]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
+                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) a la Base de Datos del sistema de matriculas\n\n"+"* + * + * + * + * + * + * + "+conexionBD.getArregloUsuario()[2]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
                 
                 switch(conexionBD.getArregloUsuario()[2])
                 {
@@ -113,7 +113,7 @@ public class Controlador_FRM_LogIn implements ActionListener
         {
             if(metodos_XML_Usuarios.consultarInformacionDelXml(frm_Ventana_LogIn.devolverUsuario()) && metodos_XML_Usuarios.getArregloInformacion()[2].equalsIgnoreCase(frm_Ventana_LogIn.devolverContraseña()))
             {
-                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"* + * + * + * + * + * + * + "+metodos_XML_Usuarios.getArregloInformacion()[3]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
+                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) a los arhivos XML del sistema de matriculas\n\n"+"* + * + * + * + * + * + * + "+metodos_XML_Usuarios.getArregloInformacion()[3]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
                 if(metodos_XML_Usuarios.getArregloInformacion()[3].equalsIgnoreCase("Administrador"))
                 {
                     frm_Ventana_LogIn.soyAdministrador();
@@ -161,7 +161,7 @@ public class Controlador_FRM_LogIn implements ActionListener
         {
             if(metodosUsuarios.consultarUsuario(frm_Ventana_LogIn.devolverUsuario()) && metodosUsuarios.getArregloInformacion()[1].equals(frm_Ventana_LogIn.devolverContraseña()))
             {
-                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) al sistema de matriculas\n"+"* + * + * + * + * + * + * + "+metodosUsuarios.getArregloInformacion()[2]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
+                frm_Ventana_LogIn.mostrarMensaje("Bienvenido(a) a los archivos planos del sistema de matriculas\n"+"* + * + * + * + * + * + * + "+metodosUsuarios.getArregloInformacion()[2]+" "+frm_Ventana_LogIn.devolverUsuario()+" * + * + * + * + * + * + * +");
                 if(metodosUsuarios.getArregloInformacion()[2].equalsIgnoreCase("Administrador"))
                 {
                     frm_Ventana_LogIn.soyAdministrador();

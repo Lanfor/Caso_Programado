@@ -226,39 +226,41 @@ public class ConexionBD {
         try 
         {
             cmd = con.createStatement();
-            ejecuto = cmd.execute("SELECT * FROM `detalle_matricula` WHERE codigo='"+arreglo[0]+"' AND sigla='"+arreglo[3]+"'");
-            //       NO ESTOY SEGURO DE ESTE METODO, MI CABEZA ESTÁ CERRADA
-            if(ejecuto)
-            {
-                ejecuto = cmd.execute("INSERT INTO `detalle_matricula`(`codigo`, `cedula`, `nombre`, `sigla`)  VALUES ('"+arreglo[0]+"','"+arreglo[1]+"','"+arreglo[2]+"','"+arreglo[3]+"')");
+            ejecuto = cmd.execute("INSERT INTO `detalle_matricula`(`codigo`, `cedula`, `nombre`, `sigla`)  VALUES ('"+arreglo[0]+"','"+arreglo[1]+"','"+arreglo[2]+"','"+arreglo[3]+"')");
 
-                return true;
-            }
+            return true;
             // rs.close();
         }
         catch(Exception e)
         {
             System.out.println("SQLException ejecutando sentencia registrarMatricula: " + e.getMessage());
-            return false;
         }
        return false;
     }
-    public void consultarMatricula(String codigo)
+    
+    String arregloMatricula[] = new String [2];
+    public String[] getArregloMatricula()
+    {
+        return arregloMatricula;
+    }
+    
+    public boolean consultarMatricula(String codigo, String sigla)
     {
         ResultSet rs = null;
         Statement cmd = null;
-
+        boolean existo = false;
+         
         try {
                 cmd = con.createStatement();
-                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula` WHERE codigo='"+codigo+"'");
-                
+                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula` WHERE codigo='"+codigo+"' AND sigla='"+sigla+"'");
+               
                 while (rs.next()) 
                 {
                     
-                    String cedula = rs.getString("cedula");
-                    String sigla = rs.getString("sigla");
                     
-                    //System.out.println("Información de la BD:\n\Codigo: "+codigo);
+                    arregloMatricula[0] = rs.getString("cedula");
+                    arregloMatricula[1] = rs.getString("cedula");
+                    existo = true;
                 }
                 rs.close();
         }
@@ -266,6 +268,7 @@ public class ConexionBD {
         {
             System.out.println("SQLException ejecutando sentencia consultarMatricula: " + e.getMessage());
         }
+        return existo;
     }
     public String devolverCodigo()
     {
