@@ -258,6 +258,7 @@ public class Metodos_XML_Usuarios
         
         return listaDeItems.getLength()>0;
     }
+    
     public void eliminarInformacionDelXml(String nombreUsuario)
     { 
          Element raiz = document.getDocumentElement();
