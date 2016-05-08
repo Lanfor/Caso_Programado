@@ -159,12 +159,12 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         
             if(controlador.conexionBD.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
             {
-                frm_MantenimientoCursos.mostrarInformacion(controlador.conexionBD.getArregloEstudiantes());
+                frm_MantenimientoCursos.mostrarInformacion(controlador.conexionBD.getArregloCursos());
                 frm_MantenimientoCursos.habilitarEdicion();
             }
             else
             {
-                int valor=frm_MantenimientoCursos.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                int valor=frm_MantenimientoCursos.mostrarMensajeVerificacion("La Sigla buscada no se encuentra, Desea agregarlo?.");
                 if(valor==0)
                 frm_MantenimientoCursos.habilitarAgregar();
                 else
@@ -180,8 +180,8 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
     public void modificarEnBD()
     {
-            controlador.conexionBD.modificarEstudiante(frm_MantenimientoCursos.devolverInformacion());
-            frm_MantenimientoCursos.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            controlador.conexionBD.modificarCurso(frm_MantenimientoCursos.devolverInformacion());
+            frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta.");
             frm_MantenimientoCursos.resetearGUI();
     }//fin del metodo modificar en BD
       
@@ -193,8 +193,8 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     
     public void eliminarEnBD()
     {
-            controlador.conexionBD.eliminarEstudiante(frm_MantenimientoCursos.devolverInformacion());
-            frm_MantenimientoCursos.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            controlador.conexionBD.eliminarCurso(frm_MantenimientoCursos.devolverInformacion());
+            frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta.");
             frm_MantenimientoCursos.resetearGUI();
     }
     
