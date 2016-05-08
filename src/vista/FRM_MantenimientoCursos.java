@@ -95,6 +95,11 @@ public class FRM_MantenimientoCursos extends javax.swing.JFrame {
                 formComponentHidden(evt);
             }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,6 +131,10 @@ public class FRM_MantenimientoCursos extends javax.swing.JFrame {
         if(controlador_FRM_VentanaPrincipal.getTipoAlmacenamiento().equalsIgnoreCase("Archivo Plano"))
             this.metodosCursos.escribirSobreArchivo();
     }//GEN-LAST:event_formComponentHidden
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        resetearGUI();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
