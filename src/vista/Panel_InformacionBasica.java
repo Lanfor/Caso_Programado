@@ -19,7 +19,6 @@ public class Panel_InformacionBasica extends javax.swing.JPanel {
      * Creates new form Panel_InformacionBasica
      */
     Controlador_FRM_MantenimientoEstudiantes controlador;
-    Controlador_FRM_VentanaPrincipal controlador_FRM_VentanaPrincipal;
     public Panel_InformacionBasica() 
     {
         initComponents();
@@ -151,17 +150,15 @@ public class Panel_InformacionBasica extends javax.swing.JPanel {
                 case "Archivo Plano":
                     controlador.buscarArchivosPlanos();
                 break;
-
                 case "Archivo XML":
                     //Falta XML
                 break;
                 case "Base de Datos":
-                      controlador.buscarEnBD();
+                    controlador.buscarEnBD();
                 break;
                 default:
                     JOptionPane.showMessageDialog(null,"Error 407 ha fallado el sistema");
             }
-            this.controlador.buscarArchivosPlanos();
         }  
     }//GEN-LAST:event_jt_CedulaKeyPressed
 
