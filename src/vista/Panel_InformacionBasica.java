@@ -151,7 +151,7 @@ public class Panel_InformacionBasica extends javax.swing.JPanel {
                     controlador.buscarArchivosPlanos();
                 break;
                 case "Archivo XML":
-                    //Falta XML
+                    controlador.buscarEnArchivosXML();
                 break;
                 case "Base de Datos":
                     controlador.buscarEnBD();

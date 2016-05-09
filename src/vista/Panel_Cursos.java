@@ -201,7 +201,7 @@ public class Panel_Cursos extends javax.swing.JPanel
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    controlador.buscarEnArchivosXML();
                 break;
                 case "Base de Datos":
                     controlador.buscarEnBD();
