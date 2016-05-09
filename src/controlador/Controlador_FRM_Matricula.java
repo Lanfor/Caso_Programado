@@ -158,7 +158,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                     //Falta XML
                 break;
                 case "Base de Datos":
-                    
+                    consultarMatriculaEnBD();
                 break;
                 default:
                     frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
