@@ -297,12 +297,11 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
                 case "Archivo Plano":
                     controlador.buscarEstudianteEnArchivosPlanos();
                 break;
-                
                 case "Archivo XML":
-                    //Falta XML
+                    controlador.buscarEstudianteEnXML();
                 break;
                 case "Base de Datos":
-                    
+                    controlador.buscarEstudianteEnBD();
                 break;
                 default:
                     JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");
@@ -320,10 +319,10 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                   controlador.buscarCursoEnXML();
                 break;
                 case "Base de Datos":
-                    
+                    controlador.buscarCursoEnBD();
                 break;
                 default:
                     JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");
@@ -343,10 +342,10 @@ public class Panel_InformacionMatricula extends javax.swing.JPanel {
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    controlador.buscarCursoEnXML();
                 break;
                 case "Base de Datos":
-                    
+                    controlador.buscarCursoEnBD();
                 break;
                 default:
                     JOptionPane.showMessageDialog(this, "No se pudo buscar con la tecla enter");

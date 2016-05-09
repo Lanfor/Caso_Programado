@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdk.nashorn.internal.runtime.JSType;
+import vista.FRM_Matricula;
 
 
 
@@ -261,6 +262,35 @@ public class ConexionBD {
                     arregloMatricula[0] = rs.getString("cedula");
                     arregloMatricula[1] = rs.getString("cedula");
                     existo = true;
+                }
+                rs.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("SQLException ejecutando sentencia consultarMatricula: " + e.getMessage());
+        }
+        return existo;
+    }
+    public boolean consultarMatriculaGeneral(FRM_Matricula fRM_Matricula)
+    {
+        ResultSet rs = null;
+        Statement cmd = null;
+        boolean existo = false;
+        String[] arreglo=new String[4];
+         
+        try {
+                cmd = con.createStatement();
+                rs = cmd.executeQuery("SELECT * FROM `detalle_matricula` WHERE codigo='"+fRM_Matricula.devolverCodigo()+"'");
+               
+                while (rs.next()) 
+                {
+                   arreglo[0]=fRM_Matricula.devolverCodigo();
+                   arreglo[1]=rs.getString("cedula");
+                   arreglo[2]=rs.getString("nombre");
+                   arreglo[3]=rs.getString("sigla");
+                   fRM_Matricula.agregarMatricula(arreglo);
+                   
+                   existo=true;
                 }
                 rs.close();
         }

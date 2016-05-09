@@ -148,10 +148,22 @@ public class Controlador_FRM_Matricula implements ActionListener
         {
             //WE NEED THIS METHOD FOR ALL TIPES FILES
             frm_Matricula.resetearVentana();
-           if(!metodosMatriculas.consultarMatricula(frm_Matricula.devolverCodigo()))
-               frm_Matricula.mostrarMensaje("Código Invalido");
-           else
-               frm_Matricula.habililitarFinalizar();
+            switch(controlador_Principal.getTipoAlmacenamiento())
+            {
+                case "Archivo Plano":
+                  consultarMatriculaEnArchivosPlanos();
+                break;
+                
+                case "Archivo XML":
+                    //Falta XML
+                break;
+                case "Base de Datos":
+                    
+                break;
+                default:
+                    frm_Matricula.mostrarMensaje("Error 407 ha fallado el sistema");
+            }
+          
         }
     }
     
@@ -205,6 +217,13 @@ public class Controlador_FRM_Matricula implements ActionListener
         frm_Matricula.desabilitarBotones();
     }//metodo de eliminar en archivos planos
     
+    public void consultarMatriculaEnArchivosPlanos()
+    {
+        if(!metodosMatriculas.consultarMatricula(frm_Matricula.devolverCodigo()))
+            frm_Matricula.mostrarMensaje("Código Invalido");
+           else
+               frm_Matricula.habililitarFinalizar();
+    }
     public void habilitarAgregar()
     {
         if(verificarEstudiante && verificarCurso)
@@ -331,6 +350,14 @@ public class Controlador_FRM_Matricula implements ActionListener
             frm_Matricula.colocarCodigo();
     }
     
+    public void consultarMatriculaEnBD()
+    {
+        ConexionBD conexionBD=controlador_Principal.conexionBD;
+         if(!conexionBD.consultarMatriculaGeneral(frm_Matricula))
+            frm_Matricula.mostrarMensaje("El Código no está registrado en la Base de Datos");
+           else
+               frm_Matricula.habililitarFinalizar();
+    }
     //***************************************METODOS ARCHIVOS XML************************************
     
     public void buscarEstudianteEnXML()
