@@ -51,7 +51,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    buscarEstudianteEnXML();
                 break;
                 case "Base de Datos":
                     buscarEstudianteEnBD();
@@ -70,7 +70,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    buscarCursoEnXML();
                 break;
                 case "Base de Datos":
                     buscarCursoEnBD();
@@ -96,7 +96,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    finalizarMatriculaEnXML();
                 break;
                 case "Base de Datos":
                     finalizarMatriculaEnBD();
@@ -115,7 +115,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    modificarEnXML();
                 break;
                 case "Base de Datos":
                     modificarEnBD();
@@ -134,7 +134,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    eliminarEnXML();
                 break;
                 case "Base de Datos":
                     eliminarEnBD();
@@ -155,7 +155,7 @@ public class Controlador_FRM_Matricula implements ActionListener
                 break;
                 
                 case "Archivo XML":
-                    //Falta XML
+                    consultarMatriculaEnXML();
                 break;
                 case "Base de Datos":
                     consultarMatriculaEnBD();
@@ -438,5 +438,14 @@ public class Controlador_FRM_Matricula implements ActionListener
             verificarEstudiante=false;
             frm_Matricula.limpiadoInicial();
             frm_Matricula.colocarCodigo();
+    }
+    
+    public void consultarMatriculaEnXML()
+    {
+        Metodos_XML_Matricula metodos_XML_Matricula=controlador_Principal.metodos_XML_Matricula;
+         if(!metodos_XML_Matricula.consultarInformacionGeneralDelXml(frm_Matricula))
+            frm_Matricula.mostrarMensaje("El Código no está registrado en la Archivos XML");
+           else
+               frm_Matricula.habililitarFinalizar();
     }
 }//FIN DE LA CLASE CONTROLADOR_FRM_MATRICULA

@@ -177,7 +177,7 @@ public class Metodos_XML_Matricula
     public boolean consultarInformacionDelXml(String codigo,String sigla)
     { 
          Element raiz = document.getDocumentElement();//Devuelve todos los elementos del documento y los guarda en raiz
-            NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Devuelve los elementos de la raiz con esa etiqueta
+         NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Devuelve los elementos de la raiz con esa etiqueta
          Node tag=null,datoContenido=null;
 
          boolean itemEncontrado=false,tituloCedula=false;
@@ -201,6 +201,55 @@ public class Metodos_XML_Matricula
                     {
                         itemEncontrado=true;  
                     }
+                 }
+                 if(itemEncontrado && contador<4)//Cual numero pongo
+                 {
+                    arregloInformacion[contador]=datoContenido.getNodeValue();
+                    contador++;
+                 }
+             }
+
+         }
+         return itemEncontrado;
+    }
+    
+    public boolean consultarInformacionGeneralDelXml(FRM_Matricula fRM_Matricula)
+    { 
+         Element raiz = document.getDocumentElement();//Devuelve todos los elementos del documento y los guarda en raiz
+         NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Devuelve los elementos de la raiz con esa etiqueta
+         Node tag=null,datoContenido=null;
+
+         boolean itemEncontrado=false,tituloCedula=false;
+         int contador=0;
+         String[] arreglo=new String[4];
+
+         for(int contadorItems=0; contadorItems<listaDeItems.getLength(); contadorItems++)//
+         {   
+             Node item = listaDeItems.item(contadorItems);//Devuelve el item de con la etiqueta Matricula en esa (posicion)
+             NodeList datosItem = item.getChildNodes();//Devuelve todos los Elemetos dentro de Matricula
+             for(int contadorTags=0; contadorTags<datosItem.getLength(); contadorTags++) 
+             {           
+                 tag = datosItem.item(contadorTags);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                 datoContenido = tag.getFirstChild();//devuelve el dato de la cedula
+
+                 if(tag.getNodeName().equals("codigo") && datoContenido.getNodeValue().equals(""+fRM_Matricula.devolverCodigo()) )
+                 {
+                    tag = datosItem.item(contadorTags+1);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                    datoContenido = tag.getFirstChild();//devuelve el dato del item que esté seleccionado
+                    arreglo[0]=fRM_Matricula.devolverCodigo();
+                    arreglo[1]=datoContenido.getNodeValue();
+                    
+                    tag = datosItem.item(contadorTags+2);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                    datoContenido = tag.getFirstChild();//devuelve el dato del item que esté seleccionado
+                    arreglo[2]=datoContenido.getNodeValue();
+                    
+                    tag = datosItem.item(contadorTags+3);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                    datoContenido = tag.getFirstChild();//devuelve el dato del item que esté seleccionado
+                    arreglo[3]=datoContenido.getNodeValue();
+                    
+                    fRM_Matricula.agregarMatricula(arreglo);
+                    
+                    itemEncontrado=true;
                  }
                  if(itemEncontrado && contador<4)//Cual numero pongo
                  {
