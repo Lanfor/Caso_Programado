@@ -29,7 +29,6 @@ public class Controlador_FRM_TipoAlmacenamiento implements ActionListener
         switch(e.getActionCommand())
         {
             case "Aceptar":
-//                System.out.println("Aceptar");
                 controlador_FRM_VentanaPrincipal.frm_VentanaPrincipal.show();
                     if(frm_TipoAlmacenamiento.selecionArchivoPlano())
                     {
@@ -66,7 +65,6 @@ public class Controlador_FRM_TipoAlmacenamiento implements ActionListener
                         {
                              controlador_FRM_VentanaPrincipal.frm_LogIn.show();
                         }
-                       
                         else
                         {
                            controlador_FRM_VentanaPrincipal.frm_RegistroUsuarios.show(); 

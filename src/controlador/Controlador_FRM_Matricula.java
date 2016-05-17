@@ -181,7 +181,7 @@ public class Controlador_FRM_Matricula implements ActionListener
         }
         else
         {
-            frm_Matricula.mostrarMensaje("La cédula buscada no se encuentra.");
+            frm_Matricula.mostrarMensaje("La cédula buscada no se encuentra en los Archivos Planos.");
             frm_Matricula.resetearGUI();
         }
     }//fin del metodo buscar Estudiante
@@ -203,11 +203,11 @@ public class Controlador_FRM_Matricula implements ActionListener
     
     public void modificarEnArchivosPlanos()
     {
-                                                               //L sigla vieja del curso se cambia por la nueva
+       //                                           La sigla vieja del curso se cambia por la nueva
         metodosMatriculas.modificarMatricula(frm_Matricula.devolverCodigo(),frm_Matricula.devolverSiglaSeleccionada(),frm_Matricula.devolverSigla());
-            frm_Matricula.desabilitarBotones();
-            frm_Matricula.limpiadoInicial();
-            frm_Matricula.colocarCodigo();
+        frm_Matricula.desabilitarBotones();
+        frm_Matricula.limpiadoInicial();
+        frm_Matricula.colocarCodigo();
     }//fin del metodo modificar en archivos planos
     
     public void eliminarEnArchivosPlanos()
@@ -220,7 +220,7 @@ public class Controlador_FRM_Matricula implements ActionListener
     public void consultarMatriculaEnArchivosPlanos()
     {
         if(!metodosMatriculas.consultarMatricula(frm_Matricula.devolverCodigo()))
-            frm_Matricula.mostrarMensaje("Código Invalido");
+            frm_Matricula.mostrarMensaje("Código registrado en los Archivos Planos");
            else
                frm_Matricula.habililitarFinalizar();
     }
@@ -395,12 +395,12 @@ public class Controlador_FRM_Matricula implements ActionListener
             }
             else
             {
-                frm_Matricula.mostrarMensaje("La sigla buscada no se encuentra en la Base de Datos");
+                frm_Matricula.mostrarMensaje("La sigla buscada no se encuentra en los Archivos XML");
                 frm_Matricula.resetearGUI();
             }
         }
         else
-        frm_Matricula.mostrarMensaje("Debe digitar una sigla para buscar en la Base de Datos");
+        frm_Matricula.mostrarMensaje("Debe digitar una sigla para buscar en los Archivos XML");
     }//fin del metodo buscar Curso
     
     public void modificarEnXML()

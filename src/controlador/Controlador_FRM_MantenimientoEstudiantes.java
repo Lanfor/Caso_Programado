@@ -122,7 +122,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             }
             else
             {
-                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra en los archivos planos, Desea agregarlo?.");
                 if(valor==0)
                 frm_MantenimientoEstudiantes.habilitarAgregar();
                 else
@@ -150,7 +150,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             }
             else
             {
-                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra en los archivos XML, Desea agregarlo?.");
                 if(valor==0)
                 frm_MantenimientoEstudiantes.habilitarAgregar();
                 else
@@ -175,7 +175,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
             }
             else
             {
-                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra, Desea agregarlo?.");
+                int valor=frm_MantenimientoEstudiantes.mostrarMensajeVerificacion("La cédula buscada no se encuentra en la Base de Datos, Desea agregarlo?.");
                 if(valor==0)
                 frm_MantenimientoEstudiantes.habilitarAgregar();
                 else
@@ -201,7 +201,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                     if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
                     {
                             metodosEstudiantes.agregarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-                            frm_MantenimientoEstudiantes.mostrarMensaje("Estudiante registrado con exito, en archivos planos");
+                            frm_MantenimientoEstudiantes.mostrarMensaje("Estudiante registrado con exito en archivos planos");
                             frm_MantenimientoEstudiantes.resetearGUI();   
                     }
                     else
@@ -230,7 +230,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
                     if(controlador_FRM_VentanaPrincipal.vericar.verificarVacio(frm_MantenimientoEstudiantes.devolverInformacion()[2]))
                     {
                             controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.guardarEnXML(frm_MantenimientoEstudiantes.devolverInformacion());
-                            frm_MantenimientoEstudiantes.mostrarMensaje("Estudiante registrado con exito, en archivos planos");
+                            frm_MantenimientoEstudiantes.mostrarMensaje("Estudiante registrado con exito, en archivos XML");
                             frm_MantenimientoEstudiantes.resetearGUI();   
                     }
                     else
@@ -303,7 +303,7 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
         {
             controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.modificarInformacionDelXml(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta, en los Arhivos Planos.");
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta, en los Arhivos XML");
             frm_MantenimientoEstudiantes.resetearGUI();
         }
         else
@@ -334,12 +334,12 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
         {
             metodosEstudiantes.eliminarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue eliminado de forma correcta.");
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue eliminado de forma correcta en los Archivos planos.");
             frm_MantenimientoEstudiantes.resetearGUI();
         }
         else
         {
-            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener numeros");
         }
     }//fin del metodo eliminar en Archivos Planos
     
@@ -348,12 +348,12 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
         {
             controlador_FRM_VentanaPrincipal.metodos_XML_Estudiantes.eliminarInformacionDelXml(frm_MantenimientoEstudiantes.devolverCedula());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue eliminado de forma correcta.");
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue eliminado de forma correcta en los Archivos XML");
             frm_MantenimientoEstudiantes.resetearGUI();
         }
         else
         {
-            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener números");
         }
     }
     
@@ -362,12 +362,12 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener{
         if(controlador_FRM_VentanaPrincipal.vericar.verificarNumero(frm_MantenimientoEstudiantes.devolverCedula()))
         {
             controlador_FRM_VentanaPrincipal.conexionBD.eliminarEstudiante(frm_MantenimientoEstudiantes.devolverInformacion());
-            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta.");
+            frm_MantenimientoEstudiantes.mostrarMensaje("El estudiante fue modificado de forma correcta en la Base de Datos");
             frm_MantenimientoEstudiantes.resetearGUI();
         }
         else
         {
-            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener");
+            frm_MantenimientoEstudiantes.mostrarMensaje("La cedula digitada solo debe contener números");
         }
     }//fin de la clase eliminar en BD
     

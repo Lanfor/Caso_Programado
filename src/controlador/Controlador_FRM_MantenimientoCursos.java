@@ -127,7 +127,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
         if(controlador_Principal.vericar.verificarVacio(frm_MantenimientoCursos.devolverSigla()))
         {
            controlador_Principal.metodos_XML_Cursos.guardarEnXML(frm_MantenimientoCursos.devolverInformacion());
-           frm_MantenimientoCursos.mostrarMensaje("El Curso fue registrado de forma correcta, en archivos Planos");
+           frm_MantenimientoCursos.mostrarMensaje("El Curso fue registrado de forma correcta, en archivos XML");
            frm_MantenimientoCursos.resetearGUI(); 
         }
         else
@@ -225,7 +225,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     public void modificarEnArhivosXML()
     {
         controlador_Principal.metodos_XML_Cursos.modificarInformacionDelXml(frm_MantenimientoCursos.devolverInformacion());
-        frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta, en archivos planos.");
+        frm_MantenimientoCursos.mostrarMensaje("El Curso fue modificado de forma correcta, en archivos XML.");
         frm_MantenimientoCursos.resetearGUI();
     }
     
@@ -248,7 +248,7 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener
     public void eliminarEnArchivosXML()
     {
         controlador_Principal.metodos_XML_Cursos.eliminarInformacionDelXml(frm_MantenimientoCursos.devolverSigla());
-        frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta, en archivos planos.");
+        frm_MantenimientoCursos.mostrarMensaje("El Curso fue eliminado de forma correcta, en archivos XML.");
         frm_MantenimientoCursos.resetearGUI();
     }
     

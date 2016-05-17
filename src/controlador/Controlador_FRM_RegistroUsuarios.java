@@ -40,7 +40,6 @@ public class Controlador_FRM_RegistroUsuarios implements ActionListener{
                     registarConArchivosPlanos();
                 break;
                 case "Archivo XML":
-                    //Falta XML
                     registrarConXML();
                 break;
                 case "Base de Datos":

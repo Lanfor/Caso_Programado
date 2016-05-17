@@ -58,12 +58,12 @@ public class Metodos_XML_Usuarios
         
         if(cargarXML())
         {
-            ventana.mostrarMensaje("Ya existe un archivo XML creado, ya fue cargado y puede proceder a utilizarlo");
+            System.out.println("Ya existe un archivo XML creado, ya fue cargado y puede proceder a utilizarlo");
         }
         else
         {
             crearXML();
-            ventana.mostrarMensaje("No existía un archivo XML creado, ya fue creado y puede proceder a utilizarlo");
+            System.out.println("No existía un archivo XML creado, ya fue creado y puede proceder a utilizarlo");
         }
         
         arregloInformacion=new String[4];
