@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><xml><Curso><sigla>IF-3000</sigla><nombre>PROGRA</nombre><creditos>4</creditos><horario>LM</horario></Curso></xml>
-=======
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><xml><Curso><sigla>IF3000</sigla><nombre>Progra II</nombre><creditos>4</creditos><horario>M 8-12</horario></Curso><Curso><sigla>LM150</sigla><nombre>Ingles</nombre><creditos>4</creditos><horario>L 1-5</horario></Curso><Curso><sigla>MA0320</sigla><nombre>Matematicas</nombre><creditos>4</creditos><horario>V 9-12</horario></Curso><Curso><sigla>ES1000</sigla><nombre>Estadistica</nombre><creditos>4</creditos><horario>M 8-12</horario></Curso></xml>
->>>>>>> origin/master

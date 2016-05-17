@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><xml><Matricula><codigo>00001</codigo><cedula>123</cedula><nombre>Roberto</nombre><siglas>IF-3000</siglas></Matricula></xml>
-=======
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><xml><Matricula><codigo>00001</codigo><cedula>604320400</cedula><nombre>Andy Carrillo</nombre><siglas>LM150</siglas></Matricula><Matricula><codigo>00001</codigo><cedula>604320400</cedula><nombre>Andy Carrillo</nombre><siglas>IF3000</siglas></Matricula><Matricula><codigo>00001</codigo><cedula>604320400</cedula><nombre>Andy Carrillo</nombre><siglas>LM150</siglas></Matricula></xml>
->>>>>>> origin/master
