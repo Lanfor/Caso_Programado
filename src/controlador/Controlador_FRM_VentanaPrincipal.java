@@ -52,7 +52,7 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
     Metodos_XML_Usuarios metodos_XML_Usuarios;
     Metodos_XML_Estudiantes metodos_XML_Estudiantes;
     Metodos_XML_Cursos metodos_XML_Cursos;
-    Metodos_XML_Matricula metodos_XML_Matricula;
+    public Metodos_XML_Matricula metodos_XML_Matricula;
     String TipoAlmacenamiento="";
     
     public Verificar vericar;

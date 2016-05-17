@@ -130,7 +130,7 @@ public class FRM_Matricula extends javax.swing.JFrame {
             this.panel_InformacionMatricula1.colocarCodigo(metodosMatricula.devolverCodigo());
             break;
             case "Archivo XML":
-            //Falta XML
+            this.panel_InformacionMatricula1.colocarCodigo(controlador.controlador_Principal.metodos_XML_Matricula.devolverCodigo());
             break;
             case "Base de Datos":
                   this.panel_InformacionMatricula1.colocarCodigo(controlador.controlador_Principal.conexionBD.devolverCodigo());

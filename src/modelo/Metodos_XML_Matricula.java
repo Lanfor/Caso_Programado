@@ -213,6 +213,9 @@ public class Metodos_XML_Matricula
          return itemEncontrado;
     }
     
+    
+    
+    
     public boolean consultarInformacionGeneralDelXml(FRM_Matricula fRM_Matricula)
     { 
          Element raiz = document.getDocumentElement();//Devuelve todos los elementos del documento y los guarda en raiz
@@ -268,6 +271,32 @@ public class Metodos_XML_Matricula
         NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Cual es?
         return listaDeItems.getLength()>0;
     }
+    public String devolverCodigo()
+    { 
+        String codigo;
+        Element raiz = document.getDocumentElement();
+        NodeList listaDeItems = raiz.getElementsByTagName("Matricula");//Obtiene todas las etiquetas de Matricula
+        
+        if(listaDeItems.getLength()==0)
+        {
+         codigo="00001";            
+        }//Obtiene todos los Elemetos dentro de la ultima Matricula
+        else
+        {
+            Node item = listaDeItems.item(listaDeItems.getLength()-1);//Obtiene la ultima etiqueta de matricula
+            NodeList datosItem = item.getChildNodes();
+            Node tag = datosItem.item(0);//Obtiene el codigo de la ultima matricula
+            Node datoContenido = tag.getFirstChild();//devuelve el dato del codigo
+            codigo=datoContenido.getNodeValue();//Obtiene el dato del codigo como un String       
+            int numero=Integer.parseInt(codigo);
+            numero++;
+            codigo="0000"+numero;
+        }
+        codigo=codigo.substring(codigo.length()-5, codigo.length());
+        return codigo;
+    }
+    
+    
     public String[] getArregloInformacion()
     {
         return this.arregloInformacion;
