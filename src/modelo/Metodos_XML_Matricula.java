@@ -301,7 +301,7 @@ public class Metodos_XML_Matricula
     {
         return this.arregloInformacion;
     }
-    public void modificarInformacionDelXml(String informacion[])
+    public void modificarInformacionDelXml(String informacion[], String siglaVieja)
     { 
          Element raiz = document.getDocumentElement();
          NodeList listaDeItems = raiz.getElementsByTagName("matricula");
@@ -320,8 +320,16 @@ public class Metodos_XML_Matricula
                     tag = datosItem.item(contadorTags); 
                     datoContenido = tag.getFirstChild();
                     if(tag.getNodeName().equals("codigo") && datoContenido.getNodeValue().equals(""+informacion[0]) )
-                    {   
-                       itemEncontrado=true;     
+                    { 
+                        System.out.println("Si se encontró el código");
+                        tag = datosItem.item(contadorTags+3);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                        datoContenido = tag.getFirstChild();//devuelve el dato del item que esté seleccionado
+                    
+                        if(tag.getNodeName().equals("siglas") && datoContenido.getNodeValue().equals(""+siglaVieja))
+                        {
+                            System.out.println("Se modificará la Matricula con el codigo: "+informacion[0]+" y sigla: "+siglaVieja);
+                            itemEncontrado=true;     
+                        }
                     }
                     if(itemEncontrado && contador<4)//Del tamaño del arreglo que entra el numero
                     {

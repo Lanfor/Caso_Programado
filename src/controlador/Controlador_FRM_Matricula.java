@@ -406,7 +406,8 @@ public class Controlador_FRM_Matricula implements ActionListener
     public void modificarEnXML()
     {
         Metodos_XML_Matricula metodos_XML_Matricula=controlador_Principal.metodos_XML_Matricula;
-        metodos_XML_Matricula.modificarInformacionDelXml(frm_Matricula.devolverInformacion());
+        
+        metodos_XML_Matricula.modificarInformacionDelXml(frm_Matricula.devolverInformacion(),frm_Matricula.devolverSiglaSeleccionada());
         frm_Matricula.desabilitarBotones();
         frm_Matricula.limpiadoInicial();
         frm_Matricula.colocarCodigo();
