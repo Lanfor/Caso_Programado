@@ -92,6 +92,8 @@ public class Controlador_FRM_LogIn implements ActionListener
                 frm_Ventana_LogIn.limpiar();
                 frm_Ventana_LogIn.dispose();
                 frm_VentanaPrincipal.show();
+                frm_VentanaPrincipal.iniciarSecion();
+                frm_Ventana_LogIn.inicioSecion();
             }
             else
             {
@@ -142,6 +144,8 @@ public class Controlador_FRM_LogIn implements ActionListener
                 frm_Ventana_LogIn.limpiar();
                 frm_Ventana_LogIn.dispose();
                 frm_VentanaPrincipal.show();
+                frm_VentanaPrincipal.iniciarSecion();
+                frm_Ventana_LogIn.inicioSecion();
             }
             else
             {
@@ -188,6 +192,8 @@ public class Controlador_FRM_LogIn implements ActionListener
                 frm_Ventana_LogIn.limpiar();
                 frm_Ventana_LogIn.dispose();
                 frm_VentanaPrincipal.show();
+                frm_VentanaPrincipal.iniciarSecion();
+                frm_Ventana_LogIn.inicioSecion();
             }
             else
             {

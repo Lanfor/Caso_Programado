@@ -415,7 +415,7 @@ public class Controlador_FRM_Matricula implements ActionListener
     public void eliminarEnXML()
     {
         Metodos_XML_Matricula metodos_XML_Matricula=controlador_Principal.metodos_XML_Matricula;
-        metodos_XML_Matricula.eliminarInformacionDelXml(frm_Matricula.devolverCodigo());
+        metodos_XML_Matricula.eliminarInformacionDelXml(frm_Matricula.devolverCodigo(), frm_Matricula.devolverSiglaSeleccionada());
         frm_Matricula.borrarFila();
         frm_Matricula.desabilitarBotones();
     }//metodo de eliminar en archivos planos

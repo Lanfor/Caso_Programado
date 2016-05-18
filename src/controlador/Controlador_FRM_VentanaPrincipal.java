@@ -118,6 +118,11 @@ public class Controlador_FRM_VentanaPrincipal implements ActionListener
         {
             frm_LogIn.show();
         }
+        if(e.getActionCommand().equalsIgnoreCase("LogOut"))
+        {
+            frm_VentanaPrincipal.cerrarSecion();
+            frm_LogIn.cerrarSecion();
+        }
         if(e.getActionCommand().equalsIgnoreCase("Tipo de Almacenamiento"))
             frm_TipoAlmacenamiento.show();
     }

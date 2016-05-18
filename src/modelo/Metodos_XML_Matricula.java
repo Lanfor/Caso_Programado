@@ -197,7 +197,7 @@ public class Metodos_XML_Matricula
                     tag = datosItem.item(contadorTags+3);//devuelve la etiqueta codigo, cedula, nombre, sigla
                     datoContenido = tag.getFirstChild();//devuelve el dato del item que esté seleccionado
                     
-                    if(tag.getNodeName().equals("sigla") && datoContenido.getNodeValue().equals(""+sigla))
+                    if(tag.getNodeName().equals("siglas") && datoContenido.getNodeValue().equals(""+sigla))
                     {
                         itemEncontrado=true;  
                     }
@@ -342,7 +342,7 @@ public class Metodos_XML_Matricula
             System.err.println("Error al modificar: " + e);
         }
     }
-    public void eliminarInformacionDelXml(String codigo)
+    public void eliminarInformacionDelXml(String codigo, String sigla)
     { 
          Element raiz = document.getDocumentElement();
          NodeList listaDeItems = raiz.getElementsByTagName("Matricula");
@@ -361,14 +361,20 @@ public class Metodos_XML_Matricula
                     datoContenido = tag.getFirstChild();
                     if(tag.getNodeName().equals("codigo") && datoContenido.getNodeValue().equals(""+codigo) )
                     {
-                       itemEncontrado=true;
-                       raiz.removeChild(item);
-                       source = new DOMSource(document);
-                       result = new StreamResult(new java.io.File(nombreArchivo+".xml"));
-                       console = new StreamResult(System.out);
-                       transformer = TransformerFactory.newInstance().newTransformer();
-                       transformer.transform(source, result);
-                       transformer.transform(source, console);
+                        tag = datosItem.item(contadorTags+3);//devuelve la etiqueta codigo, cedula, nombre, sigla
+                        datoContenido = tag.getFirstChild();//devuelve el dato del item que esté seleccionado
+                    
+                        if(tag.getNodeName().equals("siglas") && datoContenido.getNodeValue().equals(""+sigla))
+                        {
+                            itemEncontrado=true;
+                            raiz.removeChild(item);
+                            source = new DOMSource(document);
+                            result = new StreamResult(new java.io.File(nombreArchivo+".xml"));
+                            console = new StreamResult(System.out);
+                            transformer = TransformerFactory.newInstance().newTransformer();
+                            transformer.transform(source, result);
+                            transformer.transform(source, console);
+                        }
                     } 
                 }
             }

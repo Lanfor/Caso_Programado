@@ -17,7 +17,7 @@ public class FRM_LogIn extends javax.swing.JFrame {
 
     Controlador_FRM_LogIn controlador;
     FRM_RegistroUsuarios frm_RegistroUsuarios;
-    FRM_VentanaPrincipal frm_VentanaPrincipal;
+    public FRM_VentanaPrincipal frm_VentanaPrincipal;
     public FRM_LogIn(FRM_VentanaPrincipal frm_VentanaPrincipal, FRM_RegistroUsuarios frm_RegistroUsuarios, MetodosUsuarios metodosUsuarios) {
         initComponents();
         setLocation(300, 200);
@@ -70,6 +70,15 @@ public class FRM_LogIn extends javax.swing.JFrame {
     public void soyUsuario()
     {
         this.frm_VentanaPrincipal.soyUsuario();
+    }
+    public void inicioSecion()
+    {
+        btn_Aceptar.setEnabled(false);
+    }
+    public void cerrarSecion()
+    {
+        btn_Aceptar.setEnabled(true);
+        btn_Registrar.setEnabled(false);
     }
     public void limpiar()
     {

@@ -30,6 +30,7 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
         this.jm_Cursos.addActionListener(controlador_FRM_VentanaPrincipal);
         this.jm_Matricula.addActionListener(controlador_FRM_VentanaPrincipal);
         this.jm_LogIn.addActionListener(controlador_FRM_VentanaPrincipal);
+        this.jm_LogOut.addActionListener(controlador_FRM_VentanaPrincipal);
         this.jm_TipoAlmacenamiento.addActionListener(controlador_FRM_VentanaPrincipal);
     }
     public void desabilitarItems()
@@ -59,6 +60,18 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
         this.jm_Cursos.setEnabled(true);
         this.jm_Matricula.setEnabled(true);
     }
+    public void cerrarSecion()
+    {
+        this.jm_Estudiantes.setEnabled(false);
+        this.jm_Cursos.setEnabled(false);
+        this.jm_Matricula.setEnabled(false);
+        this.jm_LogIn.setEnabled(true);
+        this.jm_LogOut.setEnabled(false);
+    }
+    public void iniciarSecion()
+    {
+        this.jm_LogOut.setEnabled(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +86,7 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
         jm_Archivo = new javax.swing.JMenu();
         jm_Salir = new javax.swing.JMenuItem();
         jm_LogIn = new javax.swing.JMenuItem();
+        jm_LogOut = new javax.swing.JMenuItem();
         jm_Mantenimientos = new javax.swing.JMenu();
         jm_Estudiantes = new javax.swing.JMenuItem();
         jm_Cursos = new javax.swing.JMenuItem();
@@ -93,6 +107,10 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
         jm_LogIn.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         jm_LogIn.setText("LogIn");
         jm_Archivo.add(jm_LogIn);
+
+        jm_LogOut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jm_LogOut.setText("LogOut");
+        jm_Archivo.add(jm_LogOut);
 
         jm_BarraMenu.add(jm_Archivo);
 
@@ -181,6 +199,7 @@ public class FRM_VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jm_Cursos;
     private javax.swing.JMenuItem jm_Estudiantes;
     private javax.swing.JMenuItem jm_LogIn;
+    private javax.swing.JMenuItem jm_LogOut;
     private javax.swing.JMenu jm_Mantenimientos;
     private javax.swing.JMenuItem jm_Matricula;
     private javax.swing.JMenuItem jm_Salir;
