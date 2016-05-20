@@ -411,6 +411,8 @@ public class Controlador_FRM_Matricula implements ActionListener
         frm_Matricula.desabilitarBotones();
         frm_Matricula.limpiadoInicial();
         frm_Matricula.colocarCodigo();
+        
+        
     }//fin del metodo modificar en archivos planos
     
     public void eliminarEnXML()
